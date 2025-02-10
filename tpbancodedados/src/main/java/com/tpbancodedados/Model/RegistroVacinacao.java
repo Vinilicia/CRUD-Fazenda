@@ -1,18 +1,17 @@
 package com.tpbancodedados.Model;
 
 public class RegistroVacinacao {
-    private int idVacina;
+    private int idVacinacao;
     private int idAnimal;
     private String dataVacinacao;
     private String descricao;
 
-    // Getters e Setters
     public int getIdVacina() {
-        return idVacina;
+        return idVacinacao;
     }
 
     public void setIdVacina(int idVacina) {
-        this.idVacina = idVacina;
+        this.idVacinacao = idVacina;
     }
 
     public int getIdAnimal() {

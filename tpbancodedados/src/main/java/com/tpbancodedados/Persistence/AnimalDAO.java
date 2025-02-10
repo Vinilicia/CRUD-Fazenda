@@ -6,32 +6,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.tpbancodedados.Model.Animal;
 
 public class AnimalDAO {
 
-    // Método para inserir um animal
-    public void inserirAnimal(Animal animal) {
+    // Insere um animal e retorna seu ID
+    public int inserirAnimal(Animal animal) {
         String query = "INSERT INTO Animal (nome, especie, data_nascimento) VALUES (?, ?, ?)";
+        int idGerado = -1;
 
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             PreparedStatement statement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            // Definir os parâmetros da consulta
             statement.setString(1, animal.getNome());
             statement.setString(2, animal.getEspecie());
             statement.setString(3, animal.getDataNascimento());
 
-            // Executa a operação
             statement.executeUpdate();
-            System.out.println("Animal inserido com sucesso!");
+
+            try (ResultSet rs = statement.getGeneratedKeys()) {
+                if (rs.next()) {
+                    idGerado = rs.getInt(1);
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return idGerado;
     }
 
-    // Método para listar todos os animais
+    // Lista todos os animais
     public List<Animal> listarAnimais() {
         String query = "SELECT * FROM Animal";
         List<Animal> animais = new ArrayList<>();
@@ -46,7 +51,6 @@ public class AnimalDAO {
                 animal.setNome(resultSet.getString("nome"));
                 animal.setEspecie(resultSet.getString("especie"));
                 animal.setDataNascimento(resultSet.getString("data_nascimento"));
-
                 animais.add(animal);
             }
         } catch (SQLException e) {
@@ -54,5 +58,69 @@ public class AnimalDAO {
         }
 
         return animais;
+    }
+
+    // Busca um animal pelo ID
+    public Animal buscarAnimalPorId(int id) {
+        String query = "SELECT * FROM Animal WHERE id_animal = ?";
+        Animal animal = null;
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                animal = new Animal();
+                animal.setIdAnimal(resultSet.getInt("id_animal"));
+                animal.setNome(resultSet.getString("nome"));
+                animal.setEspecie(resultSet.getString("especie"));
+                animal.setDataNascimento(resultSet.getString("data_nascimento"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return animal;
+    }
+
+    // Atualiza os dados de um animal
+    public boolean atualizarAnimal(Animal animal) {
+        String query = "UPDATE Animal SET nome = ?, especie = ?, data_nascimento = ? WHERE id_animal = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, animal.getNome());
+            statement.setString(2, animal.getEspecie());
+            statement.setString(3, animal.getDataNascimento());
+            statement.setInt(4, animal.getIdAnimal());
+
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // Deleta um animal pelo ID
+    public boolean deletarAnimal(int id) {
+        String query = "DELETE FROM Animal WHERE id_animal = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, id);
+
+            int rowsDeleted = statement.executeUpdate();
+            return rowsDeleted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

@@ -1,0 +1,15 @@
+# Diretório do Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Logs e arquivos temporários
+*.log
+*.class
+*.jar
+*.war
+*.ear
+
+# Configurações específicas da IDE
+.idea/
+*.iml
+.vscode/

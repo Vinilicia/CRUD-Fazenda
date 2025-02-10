@@ -7,11 +7,11 @@ public class Funcionario {
     private double salario;
 
     // Getters e Setters
-    public int getIdFuncionario() {
+    public int getId() {
         return idFuncionario;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
+    public void setId(int idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
 
