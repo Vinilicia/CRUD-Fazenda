@@ -20,6 +20,7 @@ public class Menu {
             System.out.println("3 - Administrar Equipamento");
             System.out.println("4 - Administrar Plantação");
             System.out.println("5 - Administrar Produto");
+            System.out.println("6 - Administrar Vacinas");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 

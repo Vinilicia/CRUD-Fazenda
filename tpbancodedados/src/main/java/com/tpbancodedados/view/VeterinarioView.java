@@ -32,7 +32,8 @@ public class VeterinarioView {
             System.out.println("3 - Editar Veterinário");
             System.out.println("4 - Escolher Animal");
             System.out.println("5 - Buscar Animais por Vetérinário");
-            System.out.println("6 - Deletar Veterinário");
+            System.out.println("6 - Deletar Animais do Vetérinário");
+            System.out.println("7 - Deletar Veterinário");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
             
@@ -97,6 +98,22 @@ public class VeterinarioView {
                     AnimalView.exibirAnimais(animais);
                     break;
                 case 6:
+                    System.out.println("Deletando Animail do Veterinário...");
+                    exibirVeterinarios(veterinarios);
+                    System.out.println("Digite o ID do Veterinário");
+                    idVeterinario = RecebedorInput.receberInputValidado(Integer.class);
+                    System.out.println("Escolhendo Animal...");
+                    AnimalView.exibirAnimais(animais);
+                    System.out.print("Digite o ID do animal");
+                    idAnimal = RecebedorInput.receberInputValidado(Integer.class);
+                    if(veterinarioController.deletarVeterinarioAnimal(idVeterinario, idAnimal)){
+                        System.out.println("Animal deletado com Sucesso do Veterinário");
+                    }
+                    else{
+                        System.out.println("Falha ao deletar Animal do Veterinário");
+                    }
+                    break;
+                case 7:
                     System.out.println("Deletando Veterinário...");
                     exibirVeterinarios(veterinarios);
                     System.out.println("Digite o ID do Veterinário");

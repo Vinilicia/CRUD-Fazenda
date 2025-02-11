@@ -1,13 +1,24 @@
 package com.tpbancodedados.view;
 
 import java.util.Scanner;
+import java.util.List;
+
+import com.tpbancodedados.model.Caseiro;
+
+import com.tpbancodedados.controller.CaseiroController;
+
+import com.tpbancodedados.view.RecebedorInput;
 
 public class CaseiroView {
+    private static CaseiroController caseiroController = new CaseiroController();
+
+    private static Caseiro caseiro = new Caseiro();
+
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void exibir() {
-        Scanner scanner = new Scanner(System.in);
         int opcao;
-        String string;
+        int idCaseiro;
 
         do {
             System.out.println("\n===== MENU DE ADMINISTRAÇÃO DE CASEIROS =====");
@@ -20,6 +31,8 @@ public class CaseiroView {
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
+            List<Caseiro> caseiros = caseiroController.listarCaseiros();
+
             if(scanner.hasNextInt()){
                 opcao = scanner.nextInt();
             }
@@ -31,7 +44,7 @@ public class CaseiroView {
             switch (opcao) {
                 case 1:
                     System.out.println("Cadastrar Caseiros...");
-                    // Chame aqui o método que cadastra o Caseiro
+                    caseiro = cadastrarAgronomo();
                     break;
                 case 2:
                     System.out.println("Buscando Caseiros...");
@@ -62,6 +75,23 @@ public class CaseiroView {
         } while (opcao != 0);
 
         scanner.close();
+    }
+
+    private static Caseiro cadastrarCaseiro(){
+        String string;
+        double decimal;
+
+        System.out.print("Nome: ");
+        string = scanner.nextLine();
+        caseiro.setNome(string);
+        System.out.print("CPF: ");
+        string = scanner.nextLine();
+        caseiro.setCpf(string);        
+        System.out.print("Salário");
+        decimal = RecebedorInput.receberInputValidado(Double.class);
+        caseiro.setSalario(decimal);
+
+        return caseiro;
     }
 
     private static void buscarCaseiros(){

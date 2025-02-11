@@ -7,6 +7,8 @@ import com.tpbancodedados.model.Agronomo;
 
 import com.tpbancodedados.controller.AgronomoController;
 
+import com.tpbancodedados.view.RecebedorInput;
+
 public class AgronomoView {
     private static AgronomoController agronomoController = new AgronomoController();
 
@@ -17,7 +19,6 @@ public class AgronomoView {
     public static void exibir() {
         int opcao;
         int idAgronomo;
-        String string;
 
         do {
             System.out.println("\n===== MENU DE ADMINISTRAÇÃO DE AGRÔNOMOS =====");

@@ -66,6 +66,17 @@ public class VeterinarioController {
 		return false;
 	}
 
+	public boolean deletarVeterinarioAnimal(int idVeterinario, int idAnimal){
+		Veterinario vet = veterinarioDAO.buscarVeterinarioPorId(idVeterinario);
+		Animal animal = animalDAO.buscarAnimalPorId(idAnimal);
+
+		if ( vet != null && animal != null){
+			return veterinarioAnimalDAO.deletarVeterinarioAnimal(idVeterinario, idAnimal);
+		}
+		
+		return false;
+	}
+
 	public List<Animal> listarAnimaisPorVeterinario(int id_veterinario) {
         List<Animal> animais = new ArrayList<>();
         List<Integer> id_animais = veterinarioAnimalDAO.buscarAnimalPorVeterinario(id_veterinario);
