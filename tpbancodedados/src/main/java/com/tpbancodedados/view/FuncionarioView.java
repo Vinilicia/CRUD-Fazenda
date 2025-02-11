@@ -1,5 +1,11 @@
 package com.tpbancodedados.view;
 
+import java.util.List;
+
+import com.tpbancodedados.model.Funcionario; 
+
+import com.tpbancodedados.controller.FuncionarioController;
+
 import com.tpbancodedados.view.AgronomoView;
 import com.tpbancodedados.view.CaseiroView;
 import com.tpbancodedados.view.VeterinarioView;
@@ -9,6 +15,7 @@ import java.util.Scanner;
 public class FuncionarioView {
 
     public static void exibir() {
+        private static FuncionarioController funcionarioController = new FuncionarioController();
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
@@ -44,7 +51,11 @@ public class FuncionarioView {
                     VeterinarioView.exibir();
                     break;
                 case 4:
-                    System.out.println("Buscando Funcionários...");
+                    System.out.println("Lista de Funcionários");
+                    List<Funcionario> funcionarios = funcionarioController.listarFuncionarios();
+                    for (Funcionario funcionario : funcionarios) {
+                        System.out.println("ID: " + funcionario.getId() + ", Nome: " + funcionario.getNome() + ", CPF: " + funcionario.getCpf() + ", Salário: " + funcionario.getSalario());
+                    }
                     buscarFuncionarios();
                     // Chame aqui o método para buscar os funcionários
                     break;
