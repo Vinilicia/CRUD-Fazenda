@@ -7,7 +7,7 @@ import com.tpbancodedados.controller.ConversorInput;
 public class RecebedorInput {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static <T> T receberInputValidado(int tipo, Class<T> clazz) {
+    public static <T> T receberInputValidado( Class<T> clazz) {
         String input;
         boolean valido = false;
 
@@ -16,11 +16,11 @@ public class RecebedorInput {
             input = scanner.nextLine();
 
             try {
-                if (tipo == 1 && clazz == Integer.class) {
+                if (clazz == Integer.class) {
                     return clazz.cast(ConversorInput.converterStringParaInt(input));
-                } else if (tipo == 2 && clazz == Double.class) {
+                } else if (clazz == Double.class) {
                     return clazz.cast(ConversorInput.converterStringParaDouble(input));
-                } else if (tipo == 3 && clazz == LocalDate.class) {
+                } else if (clazz == LocalDate.class) {
                     return clazz.cast(ConversorInput.converterStringParaLocalDate(input));
                 } else {
                     System.out.println("Tipo de entrada não reconhecido.");
