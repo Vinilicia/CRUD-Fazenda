@@ -1,13 +1,10 @@
 package com.tpbancodedados;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import com.tpbancodedados.vision.Menu;
+
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Iniciando o sistema...");
+        Menu.exibir();
     }
 }
