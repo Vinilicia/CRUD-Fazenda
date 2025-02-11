@@ -1,12 +1,22 @@
 package com.tpbancodedados.view;
 
 import java.util.Scanner;
+import java.util.List;
+
+import com.tpbancodedados.model.Agronomo;
+
+import com.tpbancodedados.controller.AgronomoController;
 
 public class AgronomoView {
+    private static AgronomoController agronomoController = new AgronomoController();
+
+    private static Agronomo agronomo = new Agronomo();    
+
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void exibir() {
-        Scanner scanner = new Scanner(System.in);
         int opcao;
+        int idAgronomo;
         String string;
 
         do {
@@ -20,6 +30,8 @@ public class AgronomoView {
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
+            List<Agronomo> agronomos = agronomoController.listarAgronomos();
+            
             if(scanner.hasNextInt()){
                 opcao = scanner.nextInt();
             }
@@ -30,8 +42,14 @@ public class AgronomoView {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Cadastrar Agrônomos...");
-                    // Chame aqui o método que cadastra o Agrônomo
+                    System.out.println("Cadastrar Agrônomo...");
+                    agronomo = cadastrarAgronomo();
+                    if(agronomoController.inserirAgronomo(agronomo)){
+                        System.out.println("Agrônomo cadastrado com Sucesso");
+                    }
+                    else{
+                        System.out.println("Falha ao cadastrar Agrônomo");
+                    }
                     break;
                 case 2:
                     System.out.println("Buscando Agrônomos...");
@@ -65,7 +83,6 @@ public class AgronomoView {
     }
 
     private static void buscarAgronomos(){
-        Scanner scanner = new Scanner(System.in);
         int opcao;
         String string;
 
@@ -116,5 +133,25 @@ public class AgronomoView {
                     break;
             }
         } while (opcao != 0);
+    }
+
+    private static Agronomo cadastrarAgronomo(){
+        String string;
+        double decimal;
+
+        System.out.print("Nome: ");
+        string = scanner.nextLine();
+        agronomo.setNome(string);
+        System.out.print("CPF: ");
+        string = scanner.nextLine();
+        agronomo.setCpf(string);        
+        System.out.print("Salário");
+        decimal = RecebedorInput.receberInputValidado(Double.class);
+        agronomo.setSalario(decimal);
+        System.out.print("Área de especialização: ");
+        string = scanner.nextLine();
+        agronomo.setAreaEspecializacao(string);
+
+        return agronomo;
     }
 }

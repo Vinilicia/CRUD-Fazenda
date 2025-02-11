@@ -23,6 +23,10 @@ public class VeterinarioController {
 		return veterinarioDAO.listarVeterinarios();
 	}
 
+	public Veterinario buscarVeterinarioPorCRMV(String crmv) {
+		return veterinarioDAO.buscarVeterinarioPorCRMV(crmv);
+	}
+
 	public boolean atualizarVeterinario(Veterinario novoVeterinario) {
 		return veterinarioDAO.atualizarVeterinario(novoVeterinario);
 	}

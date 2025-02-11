@@ -17,6 +17,7 @@ public class VeterinarioView {
     private static AnimalController animalController = new AnimalController();
 
     private static Veterinario veterinario = new Veterinario();
+
     private static Scanner scanner = new Scanner(System.in);
 
     public static void exibir() {
@@ -60,6 +61,7 @@ public class VeterinarioView {
                 case 2:
                     System.out.println("Buscando Veterinários...");
                     exibirVeterinarios(veterinarios);
+                    buscarVeterinarios();
                     break;
                 case 3:
                     System.out.println("Editando Veterinário...");
@@ -119,20 +121,64 @@ public class VeterinarioView {
 
     private static Veterinario cadastrarVeterinario(){
         String string;
+        double decimal;
+
         System.out.print("Nome: ");
         string = scanner.nextLine();
         veterinario.setNome(string);
         System.out.print("CPF: ");
         string = scanner.nextLine();
         veterinario.setCpf(string);
-        System.out.print("Salário: ");
-        string = scanner.nextLine();
-        veterinario.setSalario(Double.parseDouble(string));
+        System.out.print("Salário");
+        decimal = RecebedorInput.receberInputValidado(Double.class);
+        veterinario.setSalario(decimal);
         System.out.print("Registro CRMV: ");
         string = scanner.nextLine();
         veterinario.setRegistroCrmv(string);
 
         return veterinario;
+    }
+
+    private static void buscarVeterinarios(){
+        int opcao;
+        String string;
+        double decimal;
+
+         do{
+            System.out.println("\n===== MENU DE BUSCA DE VETERINÁRIOS =====");
+            System.out.println("1 - Buscar por Salário menor ou igual a");
+            System.out.println("2 - Buscar por Salário maior ou igual a");
+            System.out.println("3 - Buscar por Registro CRMV");
+            System.out.println("0 - Voltar");
+            System.out.print("Escolha uma opção: ");
+            if(scanner.hasNextInt()){
+                opcao = scanner.nextInt();
+            }
+            else{
+                opcao = -1;
+            }
+            scanner.nextLine();
+            switch (opcao){
+                case 1:
+                    System.out.print("Buscar Salários com o valor de no máximo");
+                    decimal = RecebedorInput.receberInputValidado(Double.class);
+                    veterinarioController.filtrarPorSalario(decimal, false);
+                    break;
+                case 2:
+                    System.out.print("Buscar Salários com o valor de no mínimo");
+                    decimal = RecebedorInput.receberInputValidado(Double.class);
+                    veterinarioController.filtrarPorSalario(decimal, false);
+                    break;
+                case 3:
+                    System.out.print("Digite o CRMV: ");
+                    string = scanner.nextLine();
+                    veterinarioController.buscarVeterinarioPorCRMV(string);
+                    break;
+                case 0:
+                    System.out.print("Voltando...");
+                    break;
+            }
+        } while (opcao != 0);
     }
 
     private static Veterinario editarVeterinario(){
