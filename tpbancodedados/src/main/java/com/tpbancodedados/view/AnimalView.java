@@ -15,7 +15,8 @@ public class AnimalView {
             System.out.println("3 - Editar Animais");
             System.out.println("4 - Registrar Vacinação");
             System.out.println("5 - Escolher Veterinário");
-            System.out.println("6 - Deletar Animal");
+            System.out.println("6 - Buscar Veterinários por Animal");
+            System.out.println("7 - Deletar Animal");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -43,11 +44,12 @@ public class AnimalView {
                     break;
                 case 5:
                     System.out.println("Escolhendo Veterinário...");
-                    // Chame aqui o método para deletar o funcionário
                     break;
                 case 6:
+                    System.out.println("Digite o ID do Animal: ");
+                    break;
+                case 7:
                     System.out.println("Deletando Animal...");
-                    // Chame aqui o método para deletar o funcionário
                     break;
                 case 0:
                     System.out.println("Voltando...");

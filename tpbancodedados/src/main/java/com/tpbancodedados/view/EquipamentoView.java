@@ -14,7 +14,8 @@ public class EquipamentoView {
             System.out.println("2 - Buscar Equipamentos");
             System.out.println("3 - Editar Equipamentos");
             System.out.println("4 - Escolher Caseiro");
-            System.out.println("5 - Deletar Equipamento");
+            System.out.println("5 - Buscar Caseiros por Equipamento");
+            System.out.println("6 - Deletar Equipamento");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -41,6 +42,10 @@ public class EquipamentoView {
                     // Chame aqui o método para buscar os funcionários
                     break;
                 case 5:
+                    System.out.println("Digite o ID do Equipamento: ");
+                    // Chame aqui o método para deletar o funcionário
+                    break;
+                case 6:
                     System.out.println("Deletando Equipamento...");
                     // Chame aqui o método para deletar o funcionário
                     break;
