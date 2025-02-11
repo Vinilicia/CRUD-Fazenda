@@ -1,12 +1,12 @@
-package com.tpbancodedados.vision;
+package com.tpbancodedados.view;
 
-import com.tpbancodedados.vision.AgronomoVision;
-import com.tpbancodedados.vision.CaseiroVision;
-import com.tpbancodedados.vision.VeterinarioVision;
+import com.tpbancodedados.view.AgronomoView;
+import com.tpbancodedados.view.CaseiroView;
+import com.tpbancodedados.view.VeterinarioView;
 
 import java.util.Scanner;
 
-public class FuncionarioVision {
+public class FuncionarioView {
 
     public static void exibir() {
         Scanner scanner = new Scanner(System.in);
@@ -28,15 +28,15 @@ public class FuncionarioVision {
             switch (opcao) {
                 case 1:
                     System.out.println("Administrar Agrônomos...");
-                    AgronomoVision.exibir();
+                    AgronomoView.exibir();
                     break;
                 case 2:
                     System.out.println("Administrar Caseiros...");
-                    CaseiroVision.exibir();
+                    CaseiroView.exibir();
                     break;
                 case 3:
                     System.out.println("Administrar Veterinários...");
-                    VeterinarioVision.exibir();
+                    VeterinarioView.exibir();
                     break;
                 case 4:
                     System.out.println("Buscando Funcionários...");

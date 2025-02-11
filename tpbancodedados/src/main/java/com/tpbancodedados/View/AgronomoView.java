@@ -1,8 +1,8 @@
-package com.tpbancodedados.vision;
+package com.tpbancodedados.view;
 
 import java.util.Scanner;
 
-public class AgronomoVision {
+public class AgronomoView {
 
     public static void exibir() {
         Scanner scanner = new Scanner(System.in);

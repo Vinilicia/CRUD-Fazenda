@@ -1,10 +1,10 @@
-package com.tpbancodedados.vision;
+package com.tpbancodedados.view;
 
-import com.tpbancodedados.vision.FuncionarioVision;
-import com.tpbancodedados.vision.AnimalVision;
-import com.tpbancodedados.vision.EquipamentoVision;
-import com.tpbancodedados.vision.PlantacaoVision;
-import com.tpbancodedados.vision.ProdutoVision;
+import com.tpbancodedados.view.FuncionarioView;
+import com.tpbancodedados.view.AnimalView;
+import com.tpbancodedados.view.EquipamentoView;
+import com.tpbancodedados.view.PlantacaoView;
+import com.tpbancodedados.view.ProdutoView;
 
 import java.util.Scanner;
 
@@ -29,23 +29,23 @@ public class Menu {
             switch (opcao) {
                 case 1:
                     System.out.println("Administrando Funcionários...");
-                    FuncionarioVision.exibir();
+                    FuncionarioView.exibir();
                     break;
                 case 2:
                     System.out.println("Administrando Animais...");
-                    AnimalVision.exibir();
+                    AnimalView.exibir();
                     break;
                 case 3:
                     System.out.println("Administrando Equipamento...");
-                    EquipamentoVision.exibir();
+                    EquipamentoView.exibir();
                     break;
                 case 4:
                     System.out.println("Administrando Plantação...");
-                    PlantacaoVision.exibir();
+                    PlantacaoView.exibir();
                     break;
                 case 5:
                     System.out.println("Administrando Produto...");
-                    ProdutoVision.exibir();
+                    ProdutoView.exibir();
                     break;
                 case 0:
                     System.out.println("Saindo...");

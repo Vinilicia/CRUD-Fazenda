@@ -1,8 +1,8 @@
-package com.tpbancodedados.vision;
+package com.tpbancodedados.view;
 
 import java.util.Scanner;
 
-public class CaseiroVision {
+public class CaseiroView {
 
     public static void exibir() {
         Scanner scanner = new Scanner(System.in);

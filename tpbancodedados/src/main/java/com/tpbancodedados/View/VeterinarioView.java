@@ -1,8 +1,8 @@
-package com.tpbancodedados.vision;
+package com.tpbancodedados.view;
 
 import java.util.Scanner;
 
-public class VeterinarioVision {
+public class VeterinarioView {
 
     public static void exibir() {
         Scanner scanner = new Scanner(System.in);

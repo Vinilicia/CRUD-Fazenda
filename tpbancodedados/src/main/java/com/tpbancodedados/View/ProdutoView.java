@@ -1,19 +1,19 @@
-package com.tpbancodedados.vision;
+package com.tpbancodedados.view;
 
 import java.util.Scanner;
 
-public class PlantacaoVision {
+public class ProdutoView {
 
     public static void exibir() {
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
         do {
-            System.out.println("\n===== MENU DE ADMINISTRAÇÃO DE PLANTAÇÕES =====");
-            System.out.println("1 - Cadastrar Plantação");
-            System.out.println("2 - Buscar Plantações");
-            System.out.println("3 - Editar Plantações");
-            System.out.println("4 - Deletar Plantação");
+            System.out.println("\n===== MENU DE ADMINISTRAÇÃO DE PRODUTOS =====");
+            System.out.println("1 - Cadastrar Produto");
+            System.out.println("2 - Buscar Produtos");
+            System.out.println("3 - Editar Produtos");
+            System.out.println("4 - Deletar Produto");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -22,16 +22,16 @@ public class PlantacaoVision {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Cadastrando Plantação...");
+                    System.out.println("Cadastrando Produto...");
                     break;
                 case 2:
-                    System.out.println("Buscando Plantações...");
+                    System.out.println("Buscando Produtos...");
                     break;
                 case 3:
-                    System.out.println("Editando Plantações...");
+                    System.out.println("Editando Produtos...");
                     break;
                 case 4:
-                    System.out.println("Deletando Plantação...");
+                    System.out.println("Deletando Produto...");
                     // Chame aqui o método para deletar o funcionário
                     break;
                 case 0:
