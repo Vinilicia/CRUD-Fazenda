@@ -1,11 +1,19 @@
 package com.tpbancodedados.view;
 
 import java.util.Scanner;
+import java.util.List;
+
+import com.tpbancodedados.model.Funcionario;
+import com.tpbancodedados.model.Veterinario;
+
+import com.tpbancodedados.controller.VeterinarioController;
 
 public class VeterinarioView {
+    private static VeterinarioController veterinarioController = new VeterinarioController();
+    private static Veterinario veterinario = new Veterinario();
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void exibir() {
-        Scanner scanner = new Scanner(System.in);
         int opcao;
 
         do {
@@ -18,6 +26,8 @@ public class VeterinarioView {
             System.out.println("6 - Deletar Veterinário");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
+            
+            List<Veterinario> veterinarios = veterinarioController.listarVeterinarios();
 
             if(scanner.hasNextInt()){
                 opcao = scanner.nextInt();
@@ -29,20 +39,22 @@ public class VeterinarioView {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Cadastrar Veterinários...");
-                    // Chame aqui o método que cadastra o Veterinário
+                    System.out.println("Cadastrando Veterinário...");
+                    cadastrarVeterinario();
+                    veterinarioController.inserirVeterinario(veterinario);
                     break;
                 case 2:
                     System.out.println("Buscando Veterinários...");
-                    // Chame aqui o método para buscar os Veterinários
+                    exibirVeterinarios(veterinarios);
                     break;
                 case 3:
                     System.out.println("Editando Veterinário...");
-                    // Chame aqui o método para deletar o Veterinário
+                    exibirVeterinarios(veterinarios);
+                    veterinarioController.atualizarVeterinario(veterinario);
                     break;
                 case 4:
+                    exibirVeterinarios(veterinarios);
                     System.out.println("Escolhendo Animal...");
-                    // Chame aqui o método para deletar o Veterinário
                     break;
                 case 5:
                     System.out.println("Digite o ID do Veterinário: ");
@@ -61,5 +73,51 @@ public class VeterinarioView {
         } while (opcao != 0);
 
         scanner.close();
+    }
+
+    private static void cadastrarVeterinario(){
+        String string;
+        System.out.print("Nome: ");
+        string = scanner.nextLine();
+        veterinario.setNome(string);
+        System.out.print("CPF: ");
+        string = scanner.nextLine();
+        veterinario.setCpf(string);
+        System.out.print("Salário: ");
+        string = scanner.nextLine();
+        veterinario.setSalario(Double.parseDouble(string));
+        System.out.print("Registro CRMV: ");
+        string = scanner.nextLine();
+        veterinario.setRegistroCrmv(string);
+    }
+
+    private static void editarVeterinario(){
+        String string;
+        System.out.print("Digite o ID do veterinário: ");
+        string = scanner.nextLine();
+        veterinario.setId(string);
+        System.out.print("Nome: ");
+        string = scanner.nextLine();
+        veterinario.setNome(string);
+        System.out.print("CPF: ");
+        string = scanner.nextLine();
+        veterinario.setCpf(string);
+        System.out.print("Salário: ");
+        string = scanner.nextLine();
+        veterinario.setSalario(Double.parseDouble(string));
+        System.out.print("Registro CRMV: ");
+        string = scanner.nextLine();
+        veterinario.setRegistroCrmv(string);
+    }
+
+    private static void exibirVeterinarios(List<Veterinario> veterinarios){
+        if (veterinarios.isEmpty()){
+            System.out.println("Nenhum funcionário encontrado.");
+            return;
+        }
+        for (Veterinario veterinario : veterinarios){
+            System.out.println("ID: " + veterinario.getId() + ", Nome: " + veterinario.getNome() +
+                    ", CPF: " + veterinario.getCpf() + ", Salário: " + veterinario.getSalario() + ", Registro CRMV: " + veterinario.getRegistroCrmv());
+        }
     }
 }

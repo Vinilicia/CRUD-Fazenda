@@ -1,0 +1,98 @@
+CREATE DATABASE IF NOT EXISTS Fazenda;
+USE Fazenda;
+
+-- Tabela Funcionario
+CREATE TABLE Funcionario (
+    id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    nome CHAR(100) NOT NULL,
+    cpf CHAR(14) UNIQUE NOT NULL,
+    salario DECIMAL(10,2) NOT NULL
+);
+
+-- Tabelas de especialização de Funcionário
+CREATE TABLE Veterinario (
+    id_funcionario INT PRIMARY KEY,
+    registro_crmv CHAR(20) NOT NULL,
+    FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario) ON DELETE CASCADE
+);
+
+CREATE TABLE Caseiro (
+    id_funcionario INT PRIMARY KEY,
+    FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario) ON DELETE CASCADE
+);
+
+CREATE TABLE Agronomo (
+    id_funcionario INT PRIMARY KEY,
+    area_especializacao CHAR(100) NOT NULL,
+    FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id_funcionario) ON DELETE CASCADE
+);
+
+-- Tabela Animal
+CREATE TABLE Animal (
+    id_animal INT AUTO_INCREMENT PRIMARY KEY,
+    nome CHAR(50) NOT NULL,
+    especie CHAR(50) NOT NULL,
+    data_nascimento DATE NOT NULL
+);
+
+-- Relação Veterinario - Animal
+CREATE TABLE VeterinarioAnimal (
+    id_funcionario INT,
+    id_animal INT,
+    PRIMARY KEY (id_funcionario, id_animal),
+    FOREIGN KEY (id_funcionario) REFERENCES Veterinario(id_funcionario) ON DELETE CASCADE,
+    FOREIGN KEY (id_animal) REFERENCES Animal(id_animal) ON DELETE CASCADE
+);
+
+-- Tabela Equipamento
+CREATE TABLE Equipamento (
+    id_equipamento INT AUTO_INCREMENT PRIMARY KEY,
+    descricao CHAR(100) NOT NULL,
+    estado CHAR(50) NOT NULL
+);
+
+-- Relação Caseiro - Equipamento
+CREATE TABLE CaseiroEquipamento (
+    id_funcionario INT,
+    id_equipamento INT,
+    PRIMARY KEY (id_funcionario, id_equipamento),
+    FOREIGN KEY (id_funcionario) REFERENCES Caseiro(id_funcionario) ON DELETE CASCADE,
+    FOREIGN KEY (id_equipamento) REFERENCES Equipamento(id_equipamento) ON DELETE CASCADE
+);
+
+-- Tabela Plantação
+CREATE TABLE Plantacao (
+    id_plantacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_funcionario INT,
+    cultura CHAR(100) NOT NULL,
+    area CHAR(50) NOT NULL,
+    data_plantio DATE NOT NULL,
+    data_colheita DATE,
+    FOREIGN KEY (id_funcionario) REFERENCES Agronomo(id_funcionario) ON DELETE SET NULL
+);
+
+-- Tabela Produto
+CREATE TABLE Produto (
+    id_produto INT AUTO_INCREMENT PRIMARY KEY,
+    tipo CHAR(100) NOT NULL,
+    quantidade FLOAT NOT NULL,
+    unidade CHAR(20) NOT NULL,
+    id_plantacao INT,
+    FOREIGN KEY (id_plantacao) REFERENCES Plantacao(id_plantacao) ON DELETE SET NULL
+);
+
+-- Tabela Vacina
+CREATE TABLE Vacina (
+    id_vacina INT AUTO_INCREMENT PRIMARY KEY,
+    descricao CHAR(100) NOT NULL
+);
+
+-- Tabela Registro de Vacinação (Entidade Fraca)
+CREATE TABLE RegistroVacinacao (
+    id_vacina INT,
+    id_animal INT,
+    data_vacinacao DATE NOT NULL,
+    PRIMARY KEY (id_vacina, id_animal, data_vacinacao),
+    FOREIGN KEY (id_vacina) REFERENCES Vacina(id_vacina) ON DELETE CASCADE,
+    FOREIGN KEY (id_animal) REFERENCES Animal(id_animal) ON DELETE CASCADE
+);
