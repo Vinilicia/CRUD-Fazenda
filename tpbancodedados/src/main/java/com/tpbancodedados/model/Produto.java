@@ -2,7 +2,6 @@ package com.tpbancodedados.model;
 
 public class Produto {
     private int idProduto;
-    private String nome;
     private String tipo;
     private float quantidade;
     private String unidade;
@@ -15,14 +14,6 @@ public class Produto {
 
     public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getTipo() {

@@ -3,7 +3,7 @@ package com.tpbancodedados.model;
 public class Equipamento {
     private int idEquipamento;
     private String descricao;
-    private String estado;
+    private EstadoEquipamento estado;
 
     public int getIdEquipamento() {
         return idEquipamento;
@@ -21,11 +21,11 @@ public class Equipamento {
         this.descricao = descricao;
     }
 
-    public String getEstado() {
+    public EstadoEquipamento getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoEquipamento estado) {
         this.estado = estado;
     }
 }

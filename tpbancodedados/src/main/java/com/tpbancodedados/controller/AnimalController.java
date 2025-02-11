@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tpbancodedados.model.Animal;
-import com.tpbancodedados.model.RegistroVacinacao;
 import com.tpbancodedados.model.Veterinario;
 import com.tpbancodedados.model.VeterinarioAnimal;
 import com.tpbancodedados.persistence.AnimalDAO;
@@ -33,8 +32,13 @@ public class AnimalController {
 		return animalDAO.deletarAnimal(id);
 	}
 
-	public List<Veterinario> listarVeterinariosPorAnimal(int id){
-		return veterinarioDAO.buscarVeterinariosPorAnimal(id);
+	public List<Veterinario> listarVeterinariosPorAnimal(int id_animal) {
+		List<Veterinario> veterinarios = new ArrayList<Veterinario>();
+		List<Integer> id_veterinarios = veterinarioAnimalDAO.buscarVeterinarioPorAnimal(id_animal);
+		for (int id : id_veterinarios) {
+			veterinarios.add(veterinarioDAO.buscarVeterinarioPorId(id));
+		}
+		return veterinarios;
 	}
 
 	public Animal buscarPorNome(String nome){

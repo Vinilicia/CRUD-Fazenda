@@ -11,7 +11,6 @@ import com.tpbancodedados.model.CaseiroEquipamento;
 
 public class CaseiroEquipamentoDAO {
 
-    // Insere um registro na tabela relacional
     public boolean inserirCaseiroEquipamento(CaseiroEquipamento caseiroEquipamento) {
         String query = "INSERT INTO CaseiroEquipamento (id_caseiro, id_equipamento) VALUES (?, ?)";
 
@@ -31,7 +30,6 @@ public class CaseiroEquipamentoDAO {
         return false;
     }
 
-    // Lista todos os registros da tabela
     public List<CaseiroEquipamento> listarCaseiroEquipamentos() {
         String query = "SELECT * FROM CaseiroEquipamento";
         List<CaseiroEquipamento> lista = new ArrayList<>();
@@ -54,7 +52,54 @@ public class CaseiroEquipamentoDAO {
         return lista;
     }
 
-    // Atualiza um registro existente
+	public List<Integer> listarEquipamentosPorCaseiro(int idCaseiro) {
+		String query = "SELECT * FROM CaseiroEquipamento WHERE id_caseiro = ?";
+		List<Integer> idEquipamentos = null;
+	
+		try (Connection connection = DatabaseConnection.getConnection();
+			 PreparedStatement statement = connection.prepareStatement(query)) {
+	
+			statement.setInt(1, idCaseiro);
+			ResultSet resultSet = statement.executeQuery();
+			idEquipamentos = new ArrayList<>();
+	
+			while (resultSet.next()) {
+				int idEquipamento = resultSet.getInt("id_equipamento");
+				idEquipamentos.add(idEquipamento);
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	
+		return idEquipamentos;
+	}
+	
+	public List<Integer> listarCaseirosPorEquipamento(int idEquipamento) {
+		String query = "SELECT * FROM CaseiroEquipamento WHERE id_equipamento = ?";
+		List<Integer> idCaseiros = null;
+	
+		try (Connection connection = DatabaseConnection.getConnection();
+			 PreparedStatement statement = connection.prepareStatement(query)) {
+	
+			statement.setInt(1, idEquipamento);
+			ResultSet resultSet = statement.executeQuery();
+			idCaseiros = new ArrayList<>();
+	
+			while (resultSet.next()) {
+				int idCaseiro = resultSet.getInt("id_caseiro");
+				idCaseiros.add(idCaseiro);
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	
+		return idCaseiros;
+	}	
+
     public boolean atualizarCaseiroEquipamento(int idCaseiro, int idEquipamentoNovo) {
         String query = "UPDATE CaseiroEquipamento SET id_equipamento = ? WHERE id_caseiro = ?";
 
@@ -74,7 +119,6 @@ public class CaseiroEquipamentoDAO {
         return false;
     }
 
-    // Deleta um registro pelo ID do caseiro e equipamento
     public boolean deletarCaseiroEquipamento(int idCaseiro, int idEquipamento) {
         String query = "DELETE FROM CaseiroEquipamento WHERE id_caseiro = ? AND id_equipamento = ?";
 

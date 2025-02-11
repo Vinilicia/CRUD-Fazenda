@@ -3,13 +3,16 @@ package com.tpbancodedados.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tpbancodedados.model.Animal;
 import com.tpbancodedados.model.Veterinario;
+import com.tpbancodedados.persistence.AnimalDAO;
 import com.tpbancodedados.persistence.VeterinarioAnimalDAO;
 import com.tpbancodedados.persistence.VeterinarioDAO;
 
 public class VeterinarioController {
 	private VeterinarioDAO veterinarioDAO = new VeterinarioDAO();
 	private VeterinarioAnimalDAO veterinarioAnimalDAO = new VeterinarioAnimalDAO();
+	private AnimalDAO animalDAO = new AnimalDAO();
 	
 	public boolean inserirVeterinario(Veterinario veterinario) {
 		return veterinarioDAO.inserirVeterinario(veterinario);
@@ -43,5 +46,15 @@ public class VeterinarioController {
 		}
 		return veterinariosFiltrados;
 	}
+
+	public List<Animal> listarAnimaisPorVeterinario(int id_veterinario) {
+        List<Animal> animais = new ArrayList<>();
+        List<Integer> id_animais = veterinarioAnimalDAO.buscarAnimalPorVeterinario(id_veterinario);
+        for (int id : id_animais) {
+            animais.add(animalDAO.buscarAnimalPorId(id));
+        }
+        return animais;
+    }
+
 
 }
