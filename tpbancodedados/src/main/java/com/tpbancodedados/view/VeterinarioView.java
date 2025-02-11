@@ -1,12 +1,20 @@
 package com.tpbancodedados.view;
 
 import java.util.Scanner;
+import java.util.List;
+
+import com.tpbancodedados.model.Veterinario;
+
+import com.tpbancodedados.controller.VeterinarioController;
 
 public class VeterinarioView {
+    private static VeterinarioController veterinarioController = new VeterinarioController();
+    private static Veterinario veterinario = new Veterinario();
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void exibir() {
-        Scanner scanner = new Scanner(System.in);
         int opcao;
+        String string;
 
         do {
             System.out.println("\n===== MENU DE ADMINISTRAÇÃO DE VETERINÁRIOS =====");
@@ -29,8 +37,20 @@ public class VeterinarioView {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Cadastrar Veterinários...");
-                    // Chame aqui o método que cadastra o Veterinário
+                    System.out.println("Cadastrando Veterinário...");
+                    System.out.print("Nome: ");
+                    string = scanner.nextLine();
+                    veterinario.setNome(string);
+                    System.out.print("CPF: ");
+                    string = scanner.nextLine();
+                    veterinario.setCpf(string);
+                    System.out.print("Salário: ");
+                    string = scanner.nextLine();
+                    veterinario.setSalario(Double.parseDouble(string));
+                    System.out.print("Registro CRMV: ");
+                    string = scanner.nextLine();
+                    veterinario.setRegistroCrmv(string);
+                    veterinarioController.inserirVeterinario(veterinario);
                     break;
                 case 2:
                     System.out.println("Buscando Veterinários...");
