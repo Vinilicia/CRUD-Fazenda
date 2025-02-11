@@ -13,11 +13,17 @@ public class PlantacaoView {
             System.out.println("1 - Cadastrar Plantação");
             System.out.println("2 - Buscar Plantações");
             System.out.println("3 - Editar Plantações");
-            System.out.println("4 - Deletar Plantação");
+            System.out.println("4 - Buscar Produtos por Plantação");
+            System.out.println("5 - Deletar Plantação");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
-            opcao = scanner.nextInt();
+            if(scanner.hasNextInt()){
+                opcao = scanner.nextInt();
+            }
+            else{
+                opcao = -1;
+            }
             scanner.nextLine();
 
             switch (opcao) {
@@ -31,6 +37,10 @@ public class PlantacaoView {
                     System.out.println("Editando Plantações...");
                     break;
                 case 4:
+                    System.out.println("Digite o ID da plantação: ");
+                    // Chame aqui o método para deletar o funcionário
+                    break;
+                case 5:
                     System.out.println("Deletando Plantação...");
                     // Chame aqui o método para deletar o funcionário
                     break;

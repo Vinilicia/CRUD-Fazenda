@@ -14,11 +14,17 @@ public class VeterinarioView {
             System.out.println("2 - Buscar Veterinários");
             System.out.println("3 - Editar Veterinário");
             System.out.println("4 - Escolher Animal");
-            System.out.println("5 - Deletar Veterinário");
+            System.out.println("5 - Buscar Animais por Vetérinário");
+            System.out.println("6 - Deletar Veterinário");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
-            opcao = scanner.nextInt();
+            if(scanner.hasNextInt()){
+                opcao = scanner.nextInt();
+            }
+            else{
+                opcao = -1;
+            }
             scanner.nextLine();
 
             switch (opcao) {
@@ -39,6 +45,10 @@ public class VeterinarioView {
                     // Chame aqui o método para deletar o Veterinário
                     break;
                 case 5:
+                    System.out.println("Digite o ID do Veterinário: ");
+                    // Chame aqui o método para deletar o Veterinário
+                    break;
+                case 6:
                     System.out.println("Deletando Veterinário...");
                     // Chame aqui o método para deletar o Veterinário
                     break;
