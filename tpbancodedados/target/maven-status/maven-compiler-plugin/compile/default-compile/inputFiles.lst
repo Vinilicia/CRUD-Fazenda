@@ -26,6 +26,7 @@
 /home/vinilicia/Documents/banco de dados/CRUD-Fazenda/tpbancodedados/src/main/java/com/tpbancodedados/Persistence/VeterinarioAnimalDAO.java
 /home/vinilicia/Documents/banco de dados/CRUD-Fazenda/tpbancodedados/src/main/java/com/tpbancodedados/Persistence/VeterinarioDAO.java
 /home/vinilicia/Documents/banco de dados/CRUD-Fazenda/tpbancodedados/src/main/java/com/tpbancodedados/Vision/AgronomoVision.java
+/home/vinilicia/Documents/banco de dados/CRUD-Fazenda/tpbancodedados/src/main/java/com/tpbancodedados/Vision/AnimalVision.java
 /home/vinilicia/Documents/banco de dados/CRUD-Fazenda/tpbancodedados/src/main/java/com/tpbancodedados/Vision/CaseiroVision.java
 /home/vinilicia/Documents/banco de dados/CRUD-Fazenda/tpbancodedados/src/main/java/com/tpbancodedados/Vision/FuncionarioVision.java
 /home/vinilicia/Documents/banco de dados/CRUD-Fazenda/tpbancodedados/src/main/java/com/tpbancodedados/Vision/Menu.java
