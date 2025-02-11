@@ -143,6 +143,8 @@ public class VeterinarioView {
         int opcao;
         String string;
         double decimal;
+        List<Veterinario> veterinarios;
+        Veterinario veterinario;
 
          do{
             System.out.println("\n===== MENU DE BUSCA DE VETERINÁRIOS =====");
@@ -162,17 +164,20 @@ public class VeterinarioView {
                 case 1:
                     System.out.print("Buscar Salários com o valor de no máximo");
                     decimal = RecebedorInput.receberInputValidado(Double.class);
-                    veterinarioController.filtrarPorSalario(decimal, false);
+                    veterinarios = veterinarioController.filtrarPorSalario(decimal, false);
+                    exibirVeterinarios(veterinarios);
                     break;
                 case 2:
                     System.out.print("Buscar Salários com o valor de no mínimo");
                     decimal = RecebedorInput.receberInputValidado(Double.class);
-                    veterinarioController.filtrarPorSalario(decimal, false);
+                    veterinarios = veterinarioController.filtrarPorSalario(decimal, true);
+                    exibirVeterinarios(veterinarios);
                     break;
                 case 3:
                     System.out.print("Digite o CRMV: ");
                     string = scanner.nextLine();
-                    veterinarioController.buscarVeterinarioPorCRMV(string);
+                    veterinario = veterinarioController.buscarVeterinarioPorCRMV(string);
+                    exibirVeterinario(veterinario);
                     break;
                 case 0:
                     System.out.print("Voltando...");
@@ -214,5 +219,14 @@ public class VeterinarioView {
             System.out.println("ID: " + veterinario.getId() + ", Nome: " + veterinario.getNome() +
                     ", CPF: " + veterinario.getCpf() + ", Salário: " + veterinario.getSalario() + ", Registro CRMV: " + veterinario.getRegistroCrmv());
         }
+    }
+
+    private static void exibirVeterinario(Veterinario veterinario){
+        if (veterinario == null){
+            System.out.println("Nenhum funcionário encontrado.");
+            return;
+        }
+        System.out.println("ID: " + veterinario.getId() + ", Nome: " + veterinario.getNome() +
+                    ", CPF: " + veterinario.getCpf() + ", Salário: " + veterinario.getSalario() + ", Registro CRMV: " + veterinario.getRegistroCrmv());
     }
 }

@@ -5,10 +5,8 @@ import java.util.List;
 
 import com.tpbancodedados.model.Agronomo;
 import com.tpbancodedados.persistence.AgronomoDAO;
-import com.tpbancodedados.persistence.FuncionarioDAO;
 
 public class AgronomoController {
-	private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 	private AgronomoDAO agronomoDAO = new AgronomoDAO();
 
 	public boolean inserirAgronomo(Agronomo agronomo) {
@@ -17,6 +15,10 @@ public class AgronomoController {
 
 	public List<Agronomo> listarAgronomos() {
 		return agronomoDAO.listarAgronomos();
+	}
+
+	public List<Agronomo> buscAgronomosPorAreaEspecializacao(String areaEspecializacao){
+		return agronomoDAO.buscarAgronomosPorEspecializacao(areaEspecializacao);
 	}
 
 	public boolean atualizarAgronomo(Agronomo novoAgronomo) {

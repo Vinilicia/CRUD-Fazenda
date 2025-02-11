@@ -24,9 +24,7 @@ public class AgronomoView {
             System.out.println("1 - Cadastrar Agrônomo");
             System.out.println("2 - Buscar Agrônomos");
             System.out.println("3 - Editar Agrônomo");
-            System.out.println("4 - Escolher Plantação");
-            System.out.println("5 - Buscar Plantações por Agrônomo");
-            System.out.println("6 - Deletar Agrônomo");
+            System.out.println("4 - Deletar Agrônomo");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -57,19 +55,26 @@ public class AgronomoView {
                     break;
                 case 3:
                     System.out.println("Editando Agrônomo...");
-                    // Chame aqui o método para deletar o Agrônomo
+                    exibirAgronomos(agronomos);
+                    agronomo = editarAgronomo();
+                    if(agronomoController.atualizarAgronomo(agronomo)){
+                        System.out.println("Agronomo editado com Sucesso");
+                    }
+                    else{
+                        System.out.println("Falha ao editar Agronomo");
+                    }
                     break;
                 case 4:
-                    System.out.println("Escolhendo Plantação...");
-                    // Chame aqui o método para deletar o Agrônomo
-                    break;
-                case 5:
-                    System.out.print("Digite o ID do Agrônomo: ");
-                    string = scanner.nextLine();
-                    break;
-                case 6:
                     System.out.println("Deletando Agrônomo...");
-                    // Chame aqui o método para deletar o Agrônomo
+                    exibirAgronomos(agronomos);
+                    System.out.print("Digite o ID do Agrônomo");
+                    idAgronomo = RecebedorInput.receberInputValidado(Integer.class);
+                    if(agronomoController.deletarAgronomo(idAgronomo)){
+                        System.out.println("Agrônomo deletado com Sucesso");
+                    }
+                    else{
+                        System.out.println("Falha ao deletar o Agrônomo");
+                    }
                     break;
                 case 0:
                     System.out.println("Voltando...");
@@ -84,16 +89,15 @@ public class AgronomoView {
 
     private static void buscarAgronomos(){
         int opcao;
+        double decimal;
         String string;
+        List<Agronomo> agronomos;
 
          do{
             System.out.println("\n===== MENU DE BUSCA DE AGRÔNOMOS =====");
-            System.out.println("1 - Buscar por Nome");
-            System.out.println("2 - Buscar por CPF");
-            System.out.println("3 - Buscar por Salário igual a");
-            System.out.println("4 - Buscar por Salário menor ou igual a");
-            System.out.println("5 - Buscar por Salário maior ou igual a");
-            System.out.println("6 - Buscar por área de especialização");
+            System.out.println("1 - Buscar por Salário menor ou igual a");
+            System.out.println("2 - Buscar por Salário maior ou igual a");
+            System.out.println("3 - Buscar por área de especialização");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
             if(scanner.hasNextInt()){
@@ -105,28 +109,22 @@ public class AgronomoView {
             scanner.nextLine();
             switch (opcao){
                 case 1:
-                    System.out.print("Digite o Nome: ");
-                    string = scanner.nextLine();
+                    System.out.print("Buscar Salários com o valor de no máximo");
+                    decimal = RecebedorInput.receberInputValidado(Double.class);
+                    agronomos = agronomoController.filtrarPorSalario(decimal, false);
+                    exibirAgronomos(agronomos);
                     break;
                 case 2:
-                    System.out.print("Digite o CPF: ");
-                    string = scanner.nextLine();
+                    System.out.print("Buscar Salários com o valor de no mínimo: ");
+                    decimal = RecebedorInput.receberInputValidado(Double.class);
+                    agronomos = agronomoController.filtrarPorSalario(decimal, false);
+                    exibirAgronomos(agronomos);
                     break;
                 case 3:
-                    System.out.print("Buscar Salários iguais a: ");
-                    string = scanner.nextLine();
-                    break;
-                case 4:
-                    System.out.print("Buscar Salários com o valor de no máximo: ");
-                    string = scanner.nextLine();
-                    break;
-                case 5:
-                    System.out.print("Buscar Salários com o valor de no mínimo: ");
-                    string = scanner.nextLine();
-                    break;
-                case 6:
                     System.out.print("Digite a área de especialização: ");
                     string = scanner.nextLine();
+                    agronomos = agronomoController.buscAgronomosPorAreaEspecializacao(string);
+                    exibirAgronomos(agronomos);
                     break;
                 case 0:
                     System.out.print("Voltando...");
@@ -153,5 +151,40 @@ public class AgronomoView {
         agronomo.setAreaEspecializacao(string);
 
         return agronomo;
+    }
+
+    private static Agronomo editarAgronomo(){
+        String string;
+        int number;
+        double decimal; 
+
+        System.out.print("ID");
+        number = RecebedorInput.receberInputValidado(Integer.class);
+        agronomo.setId(number);
+        System.out.print("Nome: ");
+        string = scanner.nextLine();
+        agronomo.setNome(string);
+        System.out.print("CPF: ");
+        string = scanner.nextLine();
+        agronomo.setCpf(string);
+        System.out.print("Salário");
+        decimal = RecebedorInput.receberInputValidado(Double.class);
+        agronomo.setSalario(decimal);
+        System.out.print("Área de Especialização: ");
+        string = scanner.nextLine();
+        agronomo.setAreaEspecializacao(string);
+
+        return agronomo;
+    }
+
+    public static void exibirAgronomos(List<Agronomo> agronomos){
+        if (agronomos.isEmpty()){
+            System.out.println("Nenhum funcionário encontrado.");
+            return;
+        }
+        for (Agronomo agronomo : agronomos){
+            System.out.println("ID: " + agronomo.getId() + ", Nome: " + agronomo.getNome() +
+                    ", CPF: " + agronomo.getCpf() + ", Salário: " + agronomo.getSalario() + ", Área de Especialização: " + agronomo.getAreaEspecializacao());
+        }
     }
 }

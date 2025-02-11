@@ -53,11 +53,15 @@ public class AgronomoDAO {
 
 
 			while (resultSet.next()) {
+				int idFuncionario = resultSet.getInt("id_funcionario");
+            	String areaEspecializacao = resultSet.getString("area_especializacao");
 				Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorId(resultSet.getInt("id_funcionario"));
 				Agronomo agronomo = new Agronomo();
+				agronomo.setId(idFuncionario);
 				agronomo.setNome(funcionario.getNome());
 				agronomo.setCpf(funcionario.getCpf());
 				agronomo.setSalario(funcionario.getSalario());
+				agronomo.setAreaEspecializacao(areaEspecializacao);
 
 				agronomos.add(agronomo);
 			}	
