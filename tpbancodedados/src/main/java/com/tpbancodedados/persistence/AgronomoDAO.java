@@ -73,9 +73,10 @@ public class AgronomoDAO {
 		Agronomo agronomo = null;
 
 		try (Connection connection = DatabaseConnection.getConnection();
-		PreparedStatement statement = connection.prepareStatement(query);
-		ResultSet resultSet = statement.executeQuery()){
+		PreparedStatement statement = connection.prepareStatement(query)){
 
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
 			Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorId(id);
 
 			if (resultSet.next()){
@@ -89,8 +90,38 @@ public class AgronomoDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 		return agronomo;
+	}
+
+	public List<Agronomo> buscarAgronomosPorEspecializacao(String areaEspecializacao){
+		String query = "SELECT * FROM Agronomo WHERE area_especializacao = ?";
+		Agronomo agronomo = null;
+		List<Agronomo> agronomos = new ArrayList<Agronomo>();
+
+		try (Connection connection = DatabaseConnection.getConnection();
+		PreparedStatement statement = connection.prepareStatement(query)){
+
+			statement.setString(1, areaEspecializacao);
+			ResultSet resultSet = statement.executeQuery();
+			
+			while (resultSet.next()){
+				agronomo = new Agronomo();
+				agronomo.setId(resultSet.getInt("id_funcionario"));
+				agronomo.setAreaEspecializacao(resultSet.getString("area_especializacao"));
+				Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorId(agronomo.getId());
+				agronomo.setNome(funcionario.getNome());
+				agronomo.setCpf(funcionario.getCpf());
+				agronomo.setSalario(funcionario.getSalario());
+				agronomos.add(agronomo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return agronomos;
 	}
 
 	public boolean atualizarAgronomo(Agronomo agronomo) {

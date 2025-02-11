@@ -32,11 +32,11 @@ public class VeterinarioController {
 		List<Veterinario> veterinariosFiltrados = new ArrayList<Veterinario>();
 		for (Veterinario veterinario : veterinarios){
 			if (maior) {
-				if (veterinario.getSalario() > salarioBase){
+				if (veterinario.getSalario() >= salarioBase){
 					veterinariosFiltrados.add(veterinario);
 				}
 			} else {
-				if (veterinario.getSalario() < salarioBase){
+				if (veterinario.getSalario() <= salarioBase){
 					veterinariosFiltrados.add(veterinario);
 				}
 			}

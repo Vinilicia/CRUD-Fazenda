@@ -32,11 +32,11 @@ public class CaseiroController {
 		List<Caseiro> caseirosFiltrados = new ArrayList<Caseiro>();
 		for (Caseiro caseiro : caseiros){
 			if (maior) {
-				if (caseiro.getSalario() > salarioBase){
+				if (caseiro.getSalario() >= salarioBase){
 					caseirosFiltrados.add(caseiro);
 				}
 			} else {
-				if (caseiro.getSalario() < salarioBase){
+				if (caseiro.getSalario() <= salarioBase){
 					caseirosFiltrados.add(caseiro);
 				}
 			}

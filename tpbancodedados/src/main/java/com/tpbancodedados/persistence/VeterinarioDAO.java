@@ -13,6 +13,7 @@ import com.tpbancodedados.model.Veterinario;
 public class VeterinarioDAO {
 
     private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+	private VeterinarioAnimalDAO veterinarioAnimalDAO = new VeterinarioAnimalDAO();
 
     public boolean inserirVeterinario(Veterinario veterinario) {
 		Funcionario funcionario = new Funcionario();
@@ -92,6 +93,42 @@ public class VeterinarioDAO {
 			e.printStackTrace();
 		}
 		return veterinario;
+	}
+
+	public Veterinario buscarVeterinarioPorCRMV(String crmv){
+		String query = "SELECT * FROM Veterinario WHERE registro_crmv = ?";
+		Veterinario veterinario = null;
+
+		try (Connection connection = DatabaseConnection.getConnection();
+		PreparedStatement statement = connection.prepareStatement(query);
+		ResultSet resultSet = statement.executeQuery()){
+
+
+			if (resultSet.next()){
+				veterinario = new Veterinario();
+				veterinario.setId(resultSet.getInt("id_funcionario"));
+				veterinario.setRegistroCrmv(resultSet.getString("registro_CRMV"));
+				Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorId(resultSet.getInt("id_funcionario"));
+				veterinario.setNome(funcionario.getNome());
+				veterinario.setCpf(funcionario.getCpf());
+				veterinario.setSalario(funcionario.getSalario());
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return veterinario;
+	}
+
+	public List<Veterinario> buscarVeterinariosPorAnimal(int id_animal) {
+		List<Veterinario> veterinarios = new ArrayList<Veterinario>();
+		List<Integer> id_veterinarios = veterinarioAnimalDAO.buscarVeterinarioPorAnimal(id_animal);
+		for (int id : id_veterinarios) {
+			veterinarios.add(buscarVeterinarioPorId(id));
+		}
+		return veterinarios;
+
 	}
 
 	public boolean atualizarVeterinario(Veterinario veterinario) {

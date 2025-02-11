@@ -1,12 +1,14 @@
 package com.tpbancodedados.model;
 
+import java.time.LocalDate;
+
 public class Plantacao {
     private int idPlantacao;
     private int idAgronomo;
-    private String tipo;
+    private String cultura;
     private float area;
-    private String dataPlantio;
-    private String dataColheita;
+    private LocalDate dataPlantio;
+    private LocalDate dataColheita;
 
     // Getters e Setters
     public int getIdPlantacao() {
@@ -25,12 +27,12 @@ public class Plantacao {
         this.idAgronomo = idAgronomo;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getCultura() {
+        return cultura;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setCultura(String cultura) {
+        this.cultura = cultura;
     }
 
     public float getArea() {
@@ -41,19 +43,19 @@ public class Plantacao {
         this.area = area;
     }
 
-    public String getDataPlantio() {
+    public LocalDate getDataPlantio() {
         return dataPlantio;
     }
 
-    public void setDataPlantio(String dataPlantio) {
+    public void setDataPlantio(LocalDate dataPlantio) {
         this.dataPlantio = dataPlantio;
     }
 
-    public String getDataColheita() {
+    public LocalDate getDataColheita() {
         return dataColheita;
     }
 
-    public void setDataColheita(String dataColheita) {
+    public void setDataColheita(LocalDate dataColheita) {
         this.dataColheita = dataColheita;
     }
 }

@@ -1,17 +1,18 @@
 package com.tpbancodedados.model;
 
+import java.time.LocalDate;
+
 public class RegistroVacinacao {
-    private int idVacinacao;
     private int idAnimal;
-    private String dataVacinacao;
-    private String descricao;
+    private int idVacinacao;
+    private LocalDate dataVacinacao;
 
-    public int getIdVacina() {
-        return idVacinacao;
-    }
+    public RegistroVacinacao() {}
 
-    public void setIdVacina(int idVacina) {
-        this.idVacinacao = idVacina;
+    public RegistroVacinacao(int idAnimal, int idVacinacao, LocalDate dataVacinacao) {
+        this.idAnimal = idAnimal;
+        this.idVacinacao = idVacinacao;
+        this.dataVacinacao = dataVacinacao;
     }
 
     public int getIdAnimal() {
@@ -22,19 +23,28 @@ public class RegistroVacinacao {
         this.idAnimal = idAnimal;
     }
 
-    public String getDataVacinacao() {
+    public int getIdVacinacao() {
+        return idVacinacao;
+    }
+
+    public void setIdVacinacao(int idVacinacao) {
+        this.idVacinacao = idVacinacao;
+    }
+
+    public LocalDate getDataVacinacao() {
         return dataVacinacao;
     }
 
-    public void setDataVacinacao(String dataVacinacao) {
+    public void setDataVacinacao(LocalDate dataVacinacao) {
         this.dataVacinacao = dataVacinacao;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    @Override
+    public String toString() {
+        return "RegistroVacinacaoAnimal{" +
+                "idAnimal=" + idAnimal +
+                ", idVacinacao=" + idVacinacao +
+                ", dataVacinacao=" + dataVacinacao +
+                '}';
     }
 }

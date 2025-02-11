@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tpbancodedados.model.Animal;
 import com.tpbancodedados.model.VeterinarioAnimal;
 
 public class VeterinarioAnimalDAO {
@@ -79,19 +78,19 @@ public class VeterinarioAnimalDAO {
 		return id_animais;
 	}
 
-	public List<Integer> buscarVeterinarioPorAnimal(int id_veterinario) {
-		String query = "SELECT * FROM VeterinarioAnimal WHERE id_veterinario = ?";
+	public List<Integer> buscarVeterinarioPorAnimal(int id_animal) {
+		String query = "SELECT * FROM VeterinarioAnimal WHERE id_animal = ?";
 		ArrayList<Integer> id_animais = null;
 
 		try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            statement.setInt(1, id_veterinario);
+            statement.setInt(1, id_animal);
             ResultSet resultSet = statement.executeQuery();
 			id_animais = new ArrayList<Integer>();
 
             if (resultSet.next()) {
-                int novoId = resultSet.getInt("id_animal");
+                int novoId = resultSet.getInt("id_veterinario");
                 id_animais.add(novoId);
             }
 

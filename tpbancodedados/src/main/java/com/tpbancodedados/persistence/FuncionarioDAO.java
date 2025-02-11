@@ -134,6 +134,31 @@ public class FuncionarioDAO {
         return funcionario;
     }
 
+	public List<Funcionario> buscarFuncionariosPorSalario(double salario) {
+		String query = "SELECT * FROM Funcionario WHERE salario = ?";
+		List<Funcionario> funcionarios = new ArrayList<>();
+	
+		try (Connection connection = DatabaseConnection.getConnection();
+			 PreparedStatement statement = connection.prepareStatement(query)) {
+	
+			statement.setDouble(1, salario);
+			ResultSet resultSet = statement.executeQuery();
+	
+			while (resultSet.next()) {
+				Funcionario funcionario = new Funcionario();
+				funcionario.setId(resultSet.getInt("id_funcionario"));
+				funcionario.setNome(resultSet.getString("nome"));
+				funcionario.setCpf(resultSet.getString("cpf"));
+				funcionario.setSalario(resultSet.getDouble("salario"));
+				funcionarios.add(funcionario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		return funcionarios;
+	}
+
     // Atualizar dados de um funcionário
     public boolean atualizarFuncionario(Funcionario funcionario) {
         String query = "UPDATE Funcionario SET nome = ?, cpf = ?, salario = ? WHERE id_funcionario = ?";

@@ -1,16 +1,19 @@
 package com.tpbancodedados.persistence;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.tpbancodedados.model.Animal;
-import com.tpbancodedados.model.Animal;
 
 public class AnimalDAO {
+
+    private VeterinarioAnimalDAO veterinarioAnimalDAO = new VeterinarioAnimalDAO();
 
     // Insere um animal e retorna seu ID
     public int inserirAnimal(Animal animal) {
@@ -22,7 +25,7 @@ public class AnimalDAO {
 
             statement.setString(1, animal.getNome());
             statement.setString(2, animal.getEspecie());
-            statement.setString(3, animal.getDataNascimento());
+            statement.setDate(3, Date.valueOf(animal.getDataNascimento()));
 
             statement.executeUpdate();
 
@@ -41,7 +44,7 @@ public class AnimalDAO {
     // Lista todos os animais
     public List<Animal> listarAnimais() {
         String query = "SELECT * FROM Animal";
-        List<Animal> animais = new ArrayList<>();
+        List<Animal> animais = new ArrayList<Animal>();
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
@@ -52,11 +55,12 @@ public class AnimalDAO {
                 animal.setIdAnimal(resultSet.getInt("id_animal"));
                 animal.setNome(resultSet.getString("nome"));
                 animal.setEspecie(resultSet.getString("especie"));
-                animal.setDataNascimento(resultSet.getString("data_nascimento"));
+                animal.setDataNascimento(resultSet.getDate("data_nascimento").toLocalDate());
                 animais.add(animal);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+			return null;
         }
 
         return animais;
@@ -78,7 +82,7 @@ public class AnimalDAO {
                 animal.setIdAnimal(resultSet.getInt("id_animal"));
                 animal.setNome(resultSet.getString("nome"));
                 animal.setEspecie(resultSet.getString("especie"));
-                animal.setDataNascimento(resultSet.getString("data_nascimento"));
+                animal.setDataNascimento(resultSet.getDate("data_nascimento").toLocalDate());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,34 +91,66 @@ public class AnimalDAO {
         return animal;
     }
 
-	public List<Animal> buscarAnimalPorVeterinario(int id_veterinario) {
-		String query = "SELECT * FROM Animal WHERE id_veterinario = ?";
-		List<Animal> plantacoes = null;
-		Animal animal;
+    public Animal buscarAnimalPorNome(String nome) {
+        String query = "SELECT * FROM Animal WHERE nome = ?";
+        Animal animal = null;
 
-		try (Connection connection = DatabaseConnection.getConnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-			plantacoes = new ArrayList<Animal>();
-            statement.setInt(1, id_veterinario);
+            statement.setString(1, nome);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 animal = new Animal();
                 animal.setIdAnimal(resultSet.getInt("id_animal"));
-                animal.setIdVeterinario(resultSet.getInt("id_veterinario"));
-                animal.setTipo(resultSet.getString("tipo"));
-                animal.setArea(resultSet.getFloat("area"));
-                animal.setDataPlantio(resultSet.getString("data_plantio"));
-                animal.setDataColheita(resultSet.getString("data_colheita"));
+                animal.setNome(resultSet.getString("nome"));
+                animal.setEspecie(resultSet.getString("especie"));
+                animal.setDataNascimento(resultSet.getDate("data_nascimento").toLocalDate());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-		return plantacoes;
-	}
 
-    // Atualiza os dados de um animal
+        return animal;
+    }
+
+	public List<Animal> buscarAnimalPorDataNascimento(LocalDate dataNascimento) {
+        String query = "SELECT * FROM Animal WHERE data_nascimento = ?";
+        Animal animal = null;
+		List<Animal> animais = new ArrayList<Animal>();
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setDate(1, Date.valueOf(dataNascimento));
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                animal = new Animal();
+                animal.setIdAnimal(resultSet.getInt("id_animal"));
+                animal.setNome(resultSet.getString("nome"));
+                animal.setEspecie(resultSet.getString("especie"));
+                animal.setDataNascimento(resultSet.getDate("data_nascimento").toLocalDate());
+				animais.add(animal);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+			return null;
+        }
+
+        return animais;
+    }
+
+    public List<Animal> buscarAnimaisPorVeterinario(int id_veterinario) {
+        List<Animal> animais = new ArrayList<>();
+        List<Integer> id_animais = veterinarioAnimalDAO.buscarAnimalPorVeterinario(id_veterinario);
+        for (int id : id_animais) {
+            animais.add(buscarAnimalPorId(id));
+        }
+        return animais;
+    }
+
     public boolean atualizarAnimal(Animal animal) {
         String query = "UPDATE Animal SET nome = ?, especie = ?, data_nascimento = ? WHERE id_animal = ?";
 
@@ -123,7 +159,7 @@ public class AnimalDAO {
 
             statement.setString(1, animal.getNome());
             statement.setString(2, animal.getEspecie());
-            statement.setString(3, animal.getDataNascimento());
+            statement.setDate(3, Date.valueOf(animal.getDataNascimento()));
             statement.setInt(4, animal.getIdAnimal());
 
             int rowsUpdated = statement.executeUpdate();

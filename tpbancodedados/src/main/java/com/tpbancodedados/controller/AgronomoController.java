@@ -32,11 +32,11 @@ public class AgronomoController {
 		List<Agronomo> agronomosFiltrados = new ArrayList<Agronomo>();
 		for (Agronomo agronomo : agronomos){
 			if (maior) {
-				if (agronomo.getSalario() > salarioBase){
+				if (agronomo.getSalario() >= salarioBase){
 					agronomosFiltrados.add(agronomo);
 				}
 			} else {
-				if (agronomo.getSalario() < salarioBase){
+				if (agronomo.getSalario() <= salarioBase){
 					agronomosFiltrados.add(agronomo);
 				}
 			}

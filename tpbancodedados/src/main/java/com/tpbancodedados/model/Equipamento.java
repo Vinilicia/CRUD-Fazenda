@@ -5,7 +5,6 @@ public class Equipamento {
     private String descricao;
     private String estado;
 
-    // Getters e Setters
     public int getIdEquipamento() {
         return idEquipamento;
     }

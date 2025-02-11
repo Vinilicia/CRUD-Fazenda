@@ -1,10 +1,11 @@
 package com.tpbancodedados.model;
 
+import java.time.LocalDate;
 public class Animal {
     private int idAnimal;
     private String nome;
     private String especie;
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 
     // Getters e Setters
     public int getIdAnimal() {
@@ -31,11 +32,11 @@ public class Animal {
         this.especie = especie;
     }
 
-    public String getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 }
