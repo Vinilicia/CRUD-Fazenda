@@ -18,7 +18,12 @@ public class EquipamentoView {
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
-            opcao = scanner.nextInt();
+            if(scanner.hasNextInt()){
+                opcao = scanner.nextInt();
+            }
+            else{
+                opcao = -1;
+            }
             scanner.nextLine();
 
             switch (opcao) {

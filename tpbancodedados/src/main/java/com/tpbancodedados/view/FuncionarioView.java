@@ -22,7 +22,12 @@ public class FuncionarioView {
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
-            opcao = scanner.nextInt();
+            if(scanner.hasNextInt()){
+                opcao = scanner.nextInt();
+            }
+            else{
+                opcao = -1;
+            }
             scanner.nextLine();
 
             switch (opcao) {
@@ -40,6 +45,8 @@ public class FuncionarioView {
                     break;
                 case 4:
                     System.out.println("Buscando Funcionários...");
+                    buscarFuncionario();
+                    opcao = 4;
                     // Chame aqui o método para buscar os funcionários
                     break;
                 case 5:
@@ -55,5 +62,39 @@ public class FuncionarioView {
         } while (opcao != 0);
 
         scanner.close();
+    }
+
+    private static void buscarFuncionario(){
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+        String string;
+        int number;
+
+         do{
+            System.out.println("1 - Buscar por Nome");
+            System.out.println("2 - Buscar por CPF");
+            System.out.println("3 - Buscar por Salário igual a");
+            System.out.println("4 - Buscar por Salário menor ou igual a");
+            System.out.println("5 - Buscar por Salário maior ou igual a");
+            System.out.println("0 - Voltar");
+            System.out.print("Escolha uma opção: ");
+            if(scanner.hasNextInt()){
+                opcao = scanner.nextInt();
+            }
+            else{
+                opcao = -1;
+            }
+            scanner.nextLine();
+            switch (opcao){
+                case 1:
+                    System.out.print("Digite o Nome: ");
+                    string = scanner.nextLine();
+                    System.out.println(string);
+                    break;
+                case 0:
+                    System.out.print("Voltando...");
+                    break;
+            }
+        } while (opcao != 0);
     }
 }
