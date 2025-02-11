@@ -22,7 +22,12 @@ public class FuncionarioView {
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
-            opcao = scanner.nextInt();
+            if(scanner.hasNextInt()){
+                opcao = scanner.nextInt();
+            }
+            else{
+                opcao = -1;
+            }
             scanner.nextLine();
 
             switch (opcao) {
@@ -40,6 +45,7 @@ public class FuncionarioView {
                     break;
                 case 4:
                     System.out.println("Buscando Funcionários...");
+                    buscarFuncionarios();
                     // Chame aqui o método para buscar os funcionários
                     break;
                 case 5:
@@ -55,5 +61,54 @@ public class FuncionarioView {
         } while (opcao != 0);
 
         scanner.close();
+    }
+
+    private static void buscarFuncionarios(){
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+        String string;
+
+         do{
+            System.out.println("\n===== MENU DE BUSCA DE FUNCIONÁRIOS =====");
+            System.out.println("1 - Buscar por Nome");
+            System.out.println("2 - Buscar por CPF");
+            System.out.println("3 - Buscar por Salário igual");
+            System.out.println("4 - Buscar por Salário menor");
+            System.out.println("5 - Buscar por Salário maior");
+            System.out.println("0 - Voltar");
+            System.out.print("Escolha uma opção: ");
+            if(scanner.hasNextInt()){
+                opcao = scanner.nextInt();
+            }
+            else{
+                opcao = -1;
+            }
+            scanner.nextLine();
+            switch (opcao){
+                case 1:
+                    System.out.print("Digite o Nome: ");
+                    string = scanner.nextLine();
+                    break;
+                case 2:
+                    System.out.print("Digite o CPF: ");
+                    string = scanner.nextLine();
+                    break;
+                case 3:
+                    System.out.print("Buscar Salários iguais a: ");
+                    string = scanner.nextLine();
+                    break;
+                case 4:
+                    System.out.print("Buscar Salários com o valor de no máximo: ");
+                    string = scanner.nextLine();
+                    break;
+                case 5:
+                    System.out.print("Buscar Salários com o valor de no mínimo: ");
+                    string = scanner.nextLine();
+                    break;
+                case 0:
+                    System.out.print("Voltando...");
+                    break;
+            }
+        } while (opcao != 0);
     }
 }
