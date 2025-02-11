@@ -24,7 +24,6 @@ public class VeterinarioDAO {
         int idFuncionario = funcionarioDAO.inserirFuncionario(funcionario);
 
         if (idFuncionario == -1) {
-            System.out.println("Erro ao inserir funcionário base para veterinário.");
             return false;
         }
 
@@ -37,7 +36,6 @@ public class VeterinarioDAO {
             statement.setString(2, veterinario.getRegistroCrmv());
 
             statement.executeUpdate();
-            System.out.println("Veterinário inserido com sucesso!");
         } catch (SQLException e) {
             e.printStackTrace();
 			return false;
@@ -55,11 +53,16 @@ public class VeterinarioDAO {
 
 
 			while (resultSet.next()) {
+				int idFuncionario = resultSet.getInt("id_funcionario");
+            	String registroCrmv = resultSet.getString("registro_crmv");
+
 				Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorId(resultSet.getInt("id_funcionario"));
 				Veterinario veterinario = new Veterinario();
+				veterinario.setId(idFuncionario);
 				veterinario.setNome(funcionario.getNome());
 				veterinario.setCpf(funcionario.getCpf());
 				veterinario.setSalario(funcionario.getSalario());
+				veterinario.setRegistroCrmv(registroCrmv);
 
 				veterinarios.add(veterinario);
 			}	

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tpbancodedados.model.Animal;
 import com.tpbancodedados.model.Veterinario;
+import com.tpbancodedados.model.VeterinarioAnimal;
 import com.tpbancodedados.persistence.AnimalDAO;
 import com.tpbancodedados.persistence.VeterinarioAnimalDAO;
 import com.tpbancodedados.persistence.VeterinarioDAO;
@@ -45,6 +46,20 @@ public class VeterinarioController {
 			}
 		}
 		return veterinariosFiltrados;
+	}
+
+	public boolean associarAnimal(int idVeterinario, int idAnimal){
+		Veterinario vet = veterinarioDAO.buscarVeterinarioPorId(idVeterinario);
+		Animal animal = animalDAO.buscarAnimalPorId(idAnimal);
+
+		if ( vet != null && animal != null){
+			VeterinarioAnimal veterinarioAnimal = new VeterinarioAnimal();
+			veterinarioAnimal.setIdAnimal(idAnimal);
+			veterinarioAnimal.setIdVeterinario(idVeterinario);
+			return veterinarioAnimalDAO.inserirVeterinarioAnimal(veterinarioAnimal);
+		}
+		
+		return false;
 	}
 
 	public List<Animal> listarAnimaisPorVeterinario(int id_veterinario) {

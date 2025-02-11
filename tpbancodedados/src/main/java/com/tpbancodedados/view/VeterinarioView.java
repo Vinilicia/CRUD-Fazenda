@@ -3,18 +3,26 @@ package com.tpbancodedados.view;
 import java.util.Scanner;
 import java.util.List;
 
-import com.tpbancodedados.model.Funcionario;
 import com.tpbancodedados.model.Veterinario;
+import com.tpbancodedados.model.Animal;
 
 import com.tpbancodedados.controller.VeterinarioController;
+import com.tpbancodedados.controller.AnimalController;
+
+import com.tpbancodedados.view.RecebedorInput;
+import com.tpbancodedados.view.AnimalView;;
 
 public class VeterinarioView {
     private static VeterinarioController veterinarioController = new VeterinarioController();
+    private static AnimalController animalController = new AnimalController();
+
     private static Veterinario veterinario = new Veterinario();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void exibir() {
         int opcao;
+        int idAnimal;
+        int idVeterinario;
 
         do {
             System.out.println("\n===== MENU DE ADMINISTRAÇÃO DE VETERINÁRIOS =====");
@@ -28,6 +36,7 @@ public class VeterinarioView {
             System.out.print("Escolha uma opção: ");
             
             List<Veterinario> veterinarios = veterinarioController.listarVeterinarios();
+            List<Animal> animais = animalController.listarAnimais();
 
             if(scanner.hasNextInt()){
                 opcao = scanner.nextInt();
@@ -40,8 +49,13 @@ public class VeterinarioView {
             switch (opcao) {
                 case 1:
                     System.out.println("Cadastrando Veterinário...");
-                    cadastrarVeterinario();
-                    veterinarioController.inserirVeterinario(veterinario);
+                    veterinario = cadastrarVeterinario();
+                    if(veterinarioController.inserirVeterinario(veterinario)){
+                        System.out.println("Veterinário cadastrado com Sucesso");
+                    }
+                    else{
+                        System.out.println("Falha ao cadastrar Veterinário");
+                    }
                     break;
                 case 2:
                     System.out.println("Buscando Veterinários...");
@@ -50,19 +64,47 @@ public class VeterinarioView {
                 case 3:
                     System.out.println("Editando Veterinário...");
                     exibirVeterinarios(veterinarios);
-                    veterinarioController.atualizarVeterinario(veterinario);
+                    veterinario = editarVeterinario();
+                    if(veterinarioController.atualizarVeterinario(veterinario)){
+                        System.out.println("Veterinário editado com Sucesso");
+                    }
+                    else{
+                        System.out.println("Falha ao editar Veterinário");
+                    }
                     break;
                 case 4:
                     exibirVeterinarios(veterinarios);
+                    System.out.print("Digite o ID do Veterinário");
+                    idVeterinario = RecebedorInput.receberInputValidado(Integer.class);
                     System.out.println("Escolhendo Animal...");
+                    AnimalView.exibirAnimais(animais);
+                    System.out.print("Digite o ID do animal");
+                    idAnimal = RecebedorInput.receberInputValidado(Integer.class);
+                    if(veterinarioController.associarAnimal(idVeterinario, idAnimal)){
+                        System.out.println("Veterinário e Animal Associado com Sucesso");
+                    }
+                    else{
+                        System.out.println("Falha ao associar Veterinário e Animal");
+                    }
                     break;
                 case 5:
-                    System.out.println("Digite o ID do Veterinário: ");
-                    // Chame aqui o método para deletar o Veterinário
+                    exibirVeterinarios(veterinarios);
+                    System.out.println("Digite o ID do Veterinário");
+                    idVeterinario = RecebedorInput.receberInputValidado(Integer.class);
+                    animais = veterinarioController.listarAnimaisPorVeterinario(idVeterinario);
+                    AnimalView.exibirAnimais(animais);
                     break;
                 case 6:
                     System.out.println("Deletando Veterinário...");
-                    // Chame aqui o método para deletar o Veterinário
+                    exibirVeterinarios(veterinarios);
+                    System.out.println("Digite o ID do Veterinário");
+                    idVeterinario = RecebedorInput.receberInputValidado(Integer.class);
+                    if(veterinarioController.deletarVeterinario(idVeterinario)){
+                        System.out.println("Veterinário deletado com Sucesso");
+                    }
+                    else{
+                        System.out.println("Falha ao deletar o Veterinário");
+                    }
                     break;
                 case 0:
                     System.out.println("Voltando...");
@@ -75,7 +117,7 @@ public class VeterinarioView {
         scanner.close();
     }
 
-    private static void cadastrarVeterinario(){
+    private static Veterinario cadastrarVeterinario(){
         String string;
         System.out.print("Nome: ");
         string = scanner.nextLine();
@@ -89,28 +131,35 @@ public class VeterinarioView {
         System.out.print("Registro CRMV: ");
         string = scanner.nextLine();
         veterinario.setRegistroCrmv(string);
+
+        return veterinario;
     }
 
-    private static void editarVeterinario(){
+    private static Veterinario editarVeterinario(){
         String string;
-        System.out.print("Digite o ID do veterinário: ");
-        string = scanner.nextLine();
-        veterinario.setId(string);
+        int number;
+        double decimal; 
+
+        System.out.print("ID");
+        number = RecebedorInput.receberInputValidado(Integer.class);
+        veterinario.setId(number);
         System.out.print("Nome: ");
         string = scanner.nextLine();
         veterinario.setNome(string);
         System.out.print("CPF: ");
         string = scanner.nextLine();
         veterinario.setCpf(string);
-        System.out.print("Salário: ");
-        string = scanner.nextLine();
-        veterinario.setSalario(Double.parseDouble(string));
+        System.out.print("Salário");
+        decimal = RecebedorInput.receberInputValidado(Double.class);
+        veterinario.setSalario(decimal);
         System.out.print("Registro CRMV: ");
         string = scanner.nextLine();
         veterinario.setRegistroCrmv(string);
+
+        return veterinario;
     }
 
-    private static void exibirVeterinarios(List<Veterinario> veterinarios){
+    public static void exibirVeterinarios(List<Veterinario> veterinarios){
         if (veterinarios.isEmpty()){
             System.out.println("Nenhum funcionário encontrado.");
             return;

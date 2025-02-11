@@ -1,6 +1,10 @@
 package com.tpbancodedados.view;
 
+import java.util.List;
 import java.util.Scanner;
+
+import com.tpbancodedados.model.Animal;
+import com.tpbancodedados.model.Veterinario;
 
 public class AnimalView {
 
@@ -60,5 +64,16 @@ public class AnimalView {
         } while (opcao != 0);
 
         scanner.close();
+    }
+
+    public static void exibirAnimais(List<Animal> animais){
+        if (animais.isEmpty()){
+            System.out.println("Nenhum Animal encontrado.");
+            return;
+        }
+        for (Animal animal : animais){
+            System.out.println("ID: " + animal.getIdAnimal() + ", Nome: " + animal.getNome() +
+                    ", Espécie: " + animal.getEspecie() + ", Data de Nascimento: " + animal.getDataNascimento());
+        }
     }
 }

@@ -12,7 +12,7 @@ public class RecebedorInput {
         boolean valido = false;
 
         while (!valido) {
-            System.out.print("Digite o valor: ");
+            System.out.print(": ");
             input = scanner.nextLine();
 
             try {
@@ -28,6 +28,7 @@ public class RecebedorInput {
                 }
             } catch (NumberFormatException | java.time.format.DateTimeParseException e) {
                 System.out.println(e.getMessage());
+                System.out.print("Digite o valor: ");
             }
         }
         return null;
