@@ -11,7 +11,6 @@ import com.tpbancodedados.model.Vacina;
 
 public class VacinaDAO {
 
-    // Inserir vacina
     public boolean inserirVacina(Vacina vacina) {
         String query = "INSERT INTO Vacina (id_vacinacao, descricao) VALUES (?, ?)";
 
@@ -31,7 +30,6 @@ public class VacinaDAO {
         return false;
     }
 
-    // Listar todas as vacinas
     public List<Vacina> listarVacinas() {
         String query = "SELECT * FROM Vacina";
         List<Vacina> lista = new ArrayList<>();
@@ -54,7 +52,6 @@ public class VacinaDAO {
         return lista;
     }
 
-    // Buscar vacina pelo ID
     public Vacina buscarVacinaPorId(int idVacina) {
         String query = "SELECT * FROM Vacina WHERE id_vacinacao = ?";
         Vacina vacina = null;
@@ -79,7 +76,31 @@ public class VacinaDAO {
         return vacina;
     }
 
-    // Atualizar vacina
+	public Vacina buscarVacinaPorDescricao(String descricaoVacina) {
+        String query = "SELECT * FROM Vacina WHERE descricao = ?";
+        Vacina vacina = null;
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, descricaoVacina);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    vacina = new Vacina();
+                    vacina.setIdVacina(resultSet.getInt("id_vacinacao"));
+                    vacina.setDescricao(resultSet.getString("descricao"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+			return null;
+        }
+
+        return vacina;
+    }
+
     public boolean atualizarVacina(Vacina vacina) {
         String query = "UPDATE Vacina SET descricao = ? WHERE id_vacinacao = ?";
 
@@ -99,7 +120,6 @@ public class VacinaDAO {
         return false;
     }
 
-    // Deletar vacina
     public boolean deletarVacina(int idVacina) {
         String query = "DELETE FROM Vacina WHERE id_vacinacao = ?";
 
@@ -117,4 +137,6 @@ public class VacinaDAO {
 
         return false;
     }
+
+	
 }
