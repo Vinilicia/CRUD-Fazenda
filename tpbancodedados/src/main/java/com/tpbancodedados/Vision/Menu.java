@@ -3,6 +3,8 @@ package com.tpbancodedados.vision;
 import com.tpbancodedados.vision.FuncionarioVision;
 import com.tpbancodedados.vision.AnimalVision;
 import com.tpbancodedados.vision.EquipamentoVision;
+import com.tpbancodedados.vision.PlantacaoVision;
+import com.tpbancodedados.vision.ProdutoVision;
 
 import java.util.Scanner;
 
@@ -39,9 +41,11 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("Administrando Plantação...");
+                    PlantacaoVision.exibir();
                     break;
                 case 5:
                     System.out.println("Administrando Produto...");
+                    ProdutoVision.exibir();
                     break;
                 case 0:
                     System.out.println("Saindo...");

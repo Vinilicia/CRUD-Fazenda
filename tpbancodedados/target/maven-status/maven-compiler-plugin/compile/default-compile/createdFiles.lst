@@ -1,7 +1,9 @@
 com/tpbancodedados/App.class
 com/tpbancodedados/Persistence/ProdutoDAO.class
+com/tpbancodedados/vision/PlantacaoVision.class
 com/tpbancodedados/Model/Veterinario.class
 com/tpbancodedados/vision/AnimalVision.class
+com/tpbancodedados/vision/ProdutoVision.class
 com/tpbancodedados/Model/Equipamento.class
 com/tpbancodedados/Persistence/EquipamentoDAO.class
 com/tpbancodedados/Model/Agronomo.class
