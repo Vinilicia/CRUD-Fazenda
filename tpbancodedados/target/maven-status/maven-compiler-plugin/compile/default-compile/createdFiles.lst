@@ -5,6 +5,7 @@ com/tpbancodedados/vision/AnimalVision.class
 com/tpbancodedados/Model/Equipamento.class
 com/tpbancodedados/Persistence/EquipamentoDAO.class
 com/tpbancodedados/Model/Agronomo.class
+com/tpbancodedados/vision/EquipamentoVision.class
 com/tpbancodedados/Persistence/VeterinarioAnimalDAO.class
 com/tpbancodedados/Persistence/PlantacaoDAO.class
 com/tpbancodedados/Model/Plantacao.class

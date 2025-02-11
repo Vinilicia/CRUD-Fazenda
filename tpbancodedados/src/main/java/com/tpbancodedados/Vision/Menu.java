@@ -2,6 +2,7 @@ package com.tpbancodedados.vision;
 
 import com.tpbancodedados.vision.FuncionarioVision;
 import com.tpbancodedados.vision.AnimalVision;
+import com.tpbancodedados.vision.EquipamentoVision;
 
 import java.util.Scanner;
 
@@ -34,6 +35,7 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("Administrando Equipamento...");
+                    EquipamentoVision.exibir();
                     break;
                 case 4:
                     System.out.println("Administrando Plantação...");
