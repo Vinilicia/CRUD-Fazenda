@@ -86,6 +86,54 @@ public class FuncionarioDAO {
         return funcionario;
     }
 
+	public Funcionario buscarFuncionarioPorNome(String nome) {
+        String query = "SELECT * FROM Funcionario WHERE nome = ?";
+        Funcionario funcionario = null;
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, nome);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                funcionario = new Funcionario();
+                funcionario.setId(resultSet.getInt("id_funcionario"));
+                funcionario.setNome(resultSet.getString("nome"));
+                funcionario.setCpf(resultSet.getString("cpf"));
+                funcionario.setSalario(resultSet.getDouble("salario"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return funcionario;
+    }
+
+	public Funcionario buscarFuncionarioPorCPF(String CPF) {
+        String query = "SELECT * FROM Funcionario WHERE cpf = ?";
+        Funcionario funcionario = null;
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, CPF);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                funcionario = new Funcionario();
+                funcionario.setId(resultSet.getInt("id_funcionario"));
+                funcionario.setNome(resultSet.getString("nome"));
+                funcionario.setCpf(resultSet.getString("cpf"));
+                funcionario.setSalario(resultSet.getDouble("salario"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return funcionario;
+    }
+
     // Atualizar dados de um funcionário
     public boolean atualizarFuncionario(Funcionario funcionario) {
         String query = "UPDATE Funcionario SET nome = ?, cpf = ?, salario = ? WHERE id_funcionario = ?";
