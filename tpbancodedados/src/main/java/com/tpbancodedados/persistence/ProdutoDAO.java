@@ -11,7 +11,6 @@ import com.tpbancodedados.model.Produto;
 
 public class ProdutoDAO {
 
-    // Insere um produto e retorna seu ID
     public int inserirProduto(Produto produto) {
         String query = "INSERT INTO Produto (nome, tipo, quantidade, unidade, id_plantacao) VALUES (?, ?, ?, ?, ?)";
         int idGerado = -1;
@@ -19,7 +18,6 @@ public class ProdutoDAO {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            statement.setString(1, produto.getNome());
             statement.setString(2, produto.getTipo());
             statement.setFloat(3, produto.getQuantidade());
             statement.setString(4, produto.getUnidade());
@@ -39,7 +37,6 @@ public class ProdutoDAO {
         return idGerado;
     }
 
-    // Lista todos os produtos
     public List<Produto> listarProdutos() {
         String query = "SELECT * FROM Produto";
         List<Produto> produtos = new ArrayList<>();
@@ -51,7 +48,6 @@ public class ProdutoDAO {
             while (resultSet.next()) {
                 Produto produto = new Produto();
                 produto.setIdProduto(resultSet.getInt("id_produto"));
-                produto.setNome(resultSet.getString("nome"));
                 produto.setTipo(resultSet.getString("tipo"));
                 produto.setQuantidade(resultSet.getFloat("quantidade"));
                 produto.setUnidade(resultSet.getString("unidade"));
@@ -65,7 +61,6 @@ public class ProdutoDAO {
         return produtos;
     }
 
-    // Busca um produto pelo ID
     public Produto buscarProdutoPorId(int id) {
         String query = "SELECT * FROM Produto WHERE id_produto = ?";
         Produto produto = null;
@@ -79,7 +74,6 @@ public class ProdutoDAO {
             if (resultSet.next()) {
                 produto = new Produto();
                 produto.setIdProduto(resultSet.getInt("id_produto"));
-                produto.setNome(resultSet.getString("nome"));
                 produto.setTipo(resultSet.getString("tipo"));
                 produto.setQuantidade(resultSet.getFloat("quantidade"));
                 produto.setUnidade(resultSet.getString("unidade"));
@@ -92,14 +86,68 @@ public class ProdutoDAO {
         return produto;
     }
 
-    // Atualiza os dados de um produto
+	public List<Produto> listarProdutoPorTipo(String tipo) {
+        String query = "SELECT * FROM Produto WHERE tipo = ?";
+        Produto produto = null;
+		List<Produto> produtos = new ArrayList<Produto>();
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, tipo);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                produto = new Produto();
+                produto.setIdProduto(resultSet.getInt("id_produto"));
+                produto.setTipo(resultSet.getString("tipo"));
+                produto.setQuantidade(resultSet.getFloat("quantidade"));
+                produto.setUnidade(resultSet.getString("unidade"));
+                produto.setIdPlantacao(resultSet.getInt("id_plantacao"));
+				produtos.add(produto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+			return null;
+        }
+
+        return produtos;
+    }
+
+	public List<Produto> listarProdutoPorPlantacao(int idPlantacao) {
+        String query = "SELECT * FROM Produto WHERE id_plantacao = ?";
+        Produto produto = null;
+		List<Produto> produtos = new ArrayList<Produto>();
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, idPlantacao);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                produto = new Produto();
+                produto.setIdProduto(resultSet.getInt("id_produto"));
+                produto.setTipo(resultSet.getString("tipo"));
+                produto.setQuantidade(resultSet.getFloat("quantidade"));
+                produto.setUnidade(resultSet.getString("unidade"));
+                produto.setIdPlantacao(resultSet.getInt("id_plantacao"));
+				produtos.add(produto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+			return null;
+        }
+
+        return produtos;
+    }
+
     public boolean atualizarProduto(Produto produto) {
         String query = "UPDATE Produto SET nome = ?, tipo = ?, quantidade = ?, unidade = ?, id_plantacao = ? WHERE id_produto = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            statement.setString(1, produto.getNome());
             statement.setString(2, produto.getTipo());
             statement.setFloat(3, produto.getQuantidade());
             statement.setString(4, produto.getUnidade());
@@ -115,7 +163,6 @@ public class ProdutoDAO {
         return false;
     }
 
-    // Deleta um produto pelo ID
     public boolean deletarProduto(int id) {
         String query = "DELETE FROM Produto WHERE id_produto = ?";
 
