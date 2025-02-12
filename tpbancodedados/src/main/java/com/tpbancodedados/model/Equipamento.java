@@ -28,4 +28,12 @@ public class Equipamento {
     public void setEstado(EstadoEquipamento estado) {
         this.estado = estado;
     }
+
+	@Override
+	public String toString() {
+		return "ID = " + idEquipamento + 
+			" , Descrição = " + descricao + 
+			" , Estado = " + estado;
+	}
+
 }

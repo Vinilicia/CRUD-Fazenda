@@ -61,12 +61,12 @@ public class Plantacao {
 
 	@Override
 	public String toString() {
-		return "ID=" + idPlantacao + 
-			", ID_Agronomo=" + idAgronomo + 
-			", Cultura='" + cultura + "'" + 
-			", Area=" + area + 
-			", Data_Plantio=" + dataPlantio + 
-			", Data_Colheita=" + dataColheita;
+		return "ID = " + idPlantacao + 
+			" , ID Agronomo = " + idAgronomo + 
+			" , Cultura = " + cultura + 
+			" , Area = " + area + 
+			" , Data Plantio = " + dataPlantio + 
+			" , Data Colheita = " + dataColheita;
 	}
 
 }
