@@ -7,9 +7,6 @@ import com.tpbancodedados.model.Funcionario;
 
 import com.tpbancodedados.controller.FuncionarioController;
 
-import com.tpbancodedados.view.AgronomoView;
-import com.tpbancodedados.view.CaseiroView;
-import com.tpbancodedados.view.VeterinarioView;
 
 public class FuncionarioView {
     private static FuncionarioController funcionarioController = new FuncionarioController();
@@ -73,7 +70,7 @@ public class FuncionarioView {
 
     private static void buscarFuncionarios(){
         int opcao;
-        String string;
+        String string = null;
 
          do{
             System.out.println("\n===== MENU DE BUSCA DE FUNCIONÁRIOS =====");

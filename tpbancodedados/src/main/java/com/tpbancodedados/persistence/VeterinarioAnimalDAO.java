@@ -11,7 +11,6 @@ import com.tpbancodedados.model.VeterinarioAnimal;
 
 public class VeterinarioAnimalDAO {
 
-    // Inserir relação veterinário-animal
     public boolean inserirVeterinarioAnimal(VeterinarioAnimal veterinarioAnimal) {
         String query = "INSERT INTO VeterinarioAnimal (id_veterinario, id_animal) VALUES (?, ?)";
 
@@ -31,7 +30,6 @@ public class VeterinarioAnimalDAO {
         return false;
     }
 
-    // Listar todas as relações veterinário-animal
     public List<VeterinarioAnimal> listarVeterinarioAnimal() {
         String query = "SELECT * FROM VeterinarioAnimal";
         List<VeterinarioAnimal> lista = new ArrayList<>();
@@ -102,7 +100,6 @@ public class VeterinarioAnimalDAO {
 		return id_animais;
 	}
 
-    // Atualizar relação veterinário-animal
     public boolean atualizarVeterinarioAnimal(int idVeterinario, int idAnimalNovo) {
         String query = "UPDATE VeterinarioAnimal SET id_animal = ? WHERE id_veterinario = ?";
 
@@ -122,7 +119,6 @@ public class VeterinarioAnimalDAO {
         return false;
     }
 
-    // Deletar relação veterinário-animal
     public boolean deletarVeterinarioAnimal(int idVeterinario, int idAnimal) {
         String query = "DELETE FROM VeterinarioAnimal WHERE id_veterinario = ? AND id_animal = ?";
 

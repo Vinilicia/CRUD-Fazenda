@@ -32,8 +32,8 @@ public class Equipamento {
 	@Override
 	public String toString() {
 		return "ID = " + idEquipamento + 
-			" , Descrição = " + descricao + 
-			" , Estado = " + estado;
+			", Descrição = " + descricao + 
+			", Estado = " + estado;
 	}
 
 }

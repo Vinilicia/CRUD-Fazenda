@@ -2,8 +2,14 @@ package com.tpbancodedados.view;
 
 import java.time.LocalDate;
 import java.util.Scanner;
-import com.tpbancodedados.controller.ConversorInput;
 
+
+// Só possui uma função que basicamente lê um input de tipo específico ( no caso só fizemos para int, double 
+// e LocalDate )
+// Ela não sai do loop enquanto não receber o formato esperado, então evita que um erro de digitação do usuário
+// o faça ter que repetir algum passo que ele tinha feito antes
+
+// vide o Conversor para entender melhor, se necessário
 public class RecebedorInput {
     private static Scanner scanner = new Scanner(System.in);
 

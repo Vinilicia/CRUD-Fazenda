@@ -7,8 +7,6 @@ import com.tpbancodedados.model.Vacina;
 
 import com.tpbancodedados.controller.VacinaController;
 
-import com.tpbancodedados.view.RecebedorInput;
-
 public class VacinaView {
     private static VacinaController vacinaController = new VacinaController();
     

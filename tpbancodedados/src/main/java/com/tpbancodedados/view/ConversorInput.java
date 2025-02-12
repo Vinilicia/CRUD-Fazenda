@@ -1,9 +1,11 @@
-package com.tpbancodedados.controller;
+package com.tpbancodedados.view;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+// Uma classe para converter a entrada de String para um tipo desejado, lançando uma exceção caso não seja
+// Basicamente só uma forma de garantir que o usuário digite um número quando for pedido um ID, e não "Jorge"
 public class ConversorInput {
 
     public static int converterStringParaInt(String valor) throws NumberFormatException {
