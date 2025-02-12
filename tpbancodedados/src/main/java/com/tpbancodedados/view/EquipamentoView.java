@@ -4,12 +4,22 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.tpbancodedados.model.Equipamento;
+import com.tpbancodedados.model.EstadoEquipamento;
+
+import com.tpbancodedados.controller.EquipamentoController;
+
+import com.tpbancodedados.view.RecebedorInput;
 
 public class EquipamentoView {
+    private static EquipamentoController equipamentoController = new EquipamentoController();
+
+    private static Equipamento equipamento = new Equipamento();
+
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void exibir() {
-        Scanner scanner = new Scanner(System.in);
         int opcao;
+        int idEquipamento;
 
         do {
             System.out.println("\n===== MENU DE ADMINISTRAÇÃO DE EQUIPAMENTOS =====");
@@ -22,6 +32,8 @@ public class EquipamentoView {
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
+            List<Equipamento> equipamentos = equipamentoController.listarTodosEquipamentos();
+
             if(scanner.hasNextInt()){
                 opcao = scanner.nextInt();
             }
@@ -33,6 +45,7 @@ public class EquipamentoView {
             switch (opcao) {
                 case 1:
                     System.out.println("Cadastrando Equipamento...");
+                    equipamento = cadastrarEquipamento();
                     break;
                 case 2:
                     System.out.println("Buscando Equipamentos...");
@@ -61,6 +74,22 @@ public class EquipamentoView {
         } while (opcao != 0);
 
         scanner.close();
+    }
+
+    private static Equipamento cadastrarEquipamento{
+        String string;
+        int opcao;
+
+        System.out.print("Descição: ");
+        string = scanner.nextLine();
+        equipamento.setDescricao(string);
+        System.out.print("Selecione o Estado");
+        do{
+
+        }while(opcao != 0)
+        string = scanner.nextLine();
+
+        return equipamento;
     }
 
     public static void exibirEquipamentos(List<Equipamento> equipamentos){

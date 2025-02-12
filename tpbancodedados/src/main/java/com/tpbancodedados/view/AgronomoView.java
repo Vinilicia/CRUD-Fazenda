@@ -52,6 +52,7 @@ public class AgronomoView {
                     break;
                 case 2:
                     System.out.println("Buscando Agrônomos...");
+                    exibirAgronomos(agronomos);
                     buscarAgronomos();
                     break;
                 case 3:

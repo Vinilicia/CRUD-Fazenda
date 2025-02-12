@@ -60,6 +60,7 @@ public class CaseiroView {
                     break;
                 case 2:
                     System.out.println("Buscando Caseiros...");
+                    exibirCaseiros(caseiros);
                     buscarCaseiros();
                     break;
                 case 3:

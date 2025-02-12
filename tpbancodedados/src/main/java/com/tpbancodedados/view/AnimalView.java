@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.tpbancodedados.model.Animal;
-import com.tpbancodedados.model.Veterinario;
+
+import com.tpbancodedados.view.RecebedorInput;
 
 public class AnimalView {
 
@@ -18,8 +19,8 @@ public class AnimalView {
             System.out.println("2 - Buscar Animais");
             System.out.println("3 - Editar Animais");
             System.out.println("4 - Registrar Vacinação");
-            System.out.println("5 - Escolher Veterinário");
-            System.out.println("6 - Buscar Veterinários por Animal");
+            System.out.println("5 - Buscar Registros de Vacinação por Animal");
+            System.out.println("6 - Deletar Registros de Vacinação por Animal");
             System.out.println("7 - Deletar Animal");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");

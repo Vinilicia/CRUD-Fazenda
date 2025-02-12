@@ -10,7 +10,7 @@ import com.tpbancodedados.controller.VeterinarioController;
 import com.tpbancodedados.controller.AnimalController;
 
 import com.tpbancodedados.view.RecebedorInput;
-import com.tpbancodedados.view.AnimalView;;
+import com.tpbancodedados.view.AnimalView;
 
 public class VeterinarioView {
     private static VeterinarioController veterinarioController = new VeterinarioController();
