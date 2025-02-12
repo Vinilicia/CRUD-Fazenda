@@ -31,8 +31,11 @@ public class PlantacaoView {
             }
             scanner.nextLine();
 
+            List<Plantacao> plantacoes = plantacaoController.listarPlantacoes();
+
             switch (opcao) {
                 case 1:
+                    System.err.println("PASSSOU CASE 1");
                     Plantacao plantacao = cadastrarPlantacao();
                     if (plantacaoController.inserirPlantacao(plantacao)) {
                         System.out.println("Plantaçao cadastrada com sucesso!");
@@ -41,13 +44,14 @@ public class PlantacaoView {
                     }
                     break;
                 case 2:
-                    List<Plantacao> plantacoes = plantacaoController.listarPlantacoes();
                     exibirPlantacoes(plantacoes);
                     break;
                 case 3:
+                    exibirPlantacoes(plantacoes);
                     editarPlantacao();
                     break;
                 case 4:
+                    exibirPlantacoes(plantacoes);
                     deletarPlantacao();
                     break;
                 case 5:

@@ -29,6 +29,8 @@ public class ProdutoView {
             }
             scanner.nextLine();
 
+            List<Produto> produtos = produtoController.listarProdutos();
+
             switch (opcao) {
                 case 1:
                     Produto produto = cadastrarProduto();
@@ -39,13 +41,14 @@ public class ProdutoView {
                     }
                     break;
                 case 2:
-                    List<Produto> produtos = produtoController.listarProdutos();
                     exibirProdutos(produtos);
                     break;
                 case 3:
+                    exibirProdutos(produtos);
                     editarProduto();
                     break;
                 case 4:
+                    exibirProdutos(produtos);
                     deletarProduto();
                     break;
                 case 0:

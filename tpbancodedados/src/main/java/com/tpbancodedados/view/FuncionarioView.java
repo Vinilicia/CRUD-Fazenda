@@ -18,14 +18,14 @@ public class FuncionarioView {
 
     public static void exibir() {
         int opcao;
+        int idFuncionario;
 
         do {
             System.out.println("\n===== MENU DE ADMINISTRAÇÃO DE FUNCIONÁRIOS =====");
             System.out.println("1 - Administrar Agrônomo");
             System.out.println("2 - Administrar Caseiro");
             System.out.println("3 - Administrar Veterinário");
-            System.out.println("4 - Buscar Funcionários");
-            System.out.println("5 - Deletar Funcionário");
+            System.out.println("4 - Listar Funcionários");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
 
@@ -36,6 +36,8 @@ public class FuncionarioView {
                 opcao = -1;
             }
             scanner.nextLine();
+
+            List<Funcionario> funcionarios = funcionarioController.listarFuncionarios();
 
             switch (opcao) {
                 case 1:
@@ -52,14 +54,7 @@ public class FuncionarioView {
                     break;
                 case 4:
                     System.out.println("Lista de Funcionários");
-                    List<Funcionario> funcionarios = funcionarioController.listarFuncionarios();
                     exibirFuncionarios(funcionarios);
-                    buscarFuncionarios();
-                    // Chame aqui o método para buscar os funcionários
-                    break;
-                case 5:
-                    System.out.println("Deletando Funcionário...");
-                    // Chame aqui o método para deletar o funcionário
                     break;
                 case 0:
                     System.out.println("Voltando...");
@@ -70,54 +65,6 @@ public class FuncionarioView {
         } while (opcao != 0);
 
         scanner.close();
-    }
-
-    private static void buscarFuncionarios(){
-        int opcao;
-        String string;
-
-         do{
-            System.out.println("\n===== MENU DE BUSCA DE FUNCIONÁRIOS =====");
-            System.out.println("1 - Buscar por Nome");
-            System.out.println("2 - Buscar por CPF");
-            System.out.println("3 - Buscar por Salário igual");
-            System.out.println("4 - Buscar por Salário menor");
-            System.out.println("5 - Buscar por Salário maior");
-            System.out.println("0 - Voltar");
-            System.out.print("Escolha uma opção: ");
-            if(scanner.hasNextInt()){
-                opcao = scanner.nextInt();
-            }
-            else{
-                opcao = -1;
-            }
-            scanner.nextLine();
-            switch (opcao){
-                case 1:
-                    System.out.print("Digite o Nome: ");
-                    string = scanner.nextLine();
-                    break;
-                case 2:
-                    System.out.print("Digite o CPF: ");
-                    string = scanner.nextLine();
-                    break;
-                case 3:
-                    System.out.print("Buscar Salários iguais a: ");
-                    string = scanner.nextLine();
-                    break;
-                case 4:
-                    System.out.print("Buscar Salários com o valor de no máximo: ");
-                    string = scanner.nextLine();
-                    break;
-                case 5:
-                    System.out.print("Buscar Salários com o valor de no mínimo: ");
-                    string = scanner.nextLine();
-                    break;
-                case 0:
-                    System.out.print("Voltando...");
-                    break;
-            }
-        } while (opcao != 0);
     }
 
     private static void exibirFuncionarios(List<Funcionario> funcionarios){
