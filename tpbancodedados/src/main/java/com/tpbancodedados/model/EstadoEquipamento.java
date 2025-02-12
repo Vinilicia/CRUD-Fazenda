@@ -19,4 +19,14 @@ public enum EstadoEquipamento {
     public String toString() {
         return descricao;
     }
+
+    public static EstadoEquipamento fromDescricao(String descricao) {
+        for (EstadoEquipamento estado : values()) {
+            if (estado.getDescricao().equalsIgnoreCase(descricao)) {
+                return estado;
+            }
+        }
+        throw new IllegalArgumentException("Estado não encontrado para a descrição: " + descricao);
+    }
 }
+

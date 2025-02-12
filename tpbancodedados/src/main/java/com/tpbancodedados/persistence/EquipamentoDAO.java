@@ -37,30 +37,31 @@ public class EquipamentoDAO {
     }
 
     public List<Equipamento> listarEquipamentos() {
-        String query = "SELECT * FROM Equipamento";
-        List<Equipamento> equipamentos = new ArrayList<>();
-
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                Equipamento equipamento = new Equipamento();
-                equipamento.setIdEquipamento(resultSet.getInt("id_equipamento"));
-                equipamento.setDescricao(resultSet.getString("descricao"));
-
-                String estadoStr = resultSet.getString("estado");
-                EstadoEquipamento estado = EstadoEquipamento.valueOf(estadoStr);
-                equipamento.setEstado(estado);
-
-                equipamentos.add(equipamento);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return equipamentos;
-    }
+		String query = "SELECT * FROM Equipamento";
+		List<Equipamento> equipamentos = new ArrayList<>();
+	
+		try (Connection connection = DatabaseConnection.getConnection();
+			 PreparedStatement statement = connection.prepareStatement(query);
+			 ResultSet resultSet = statement.executeQuery()) {
+	
+			while (resultSet.next()) {
+				Equipamento equipamento = new Equipamento();
+				equipamento.setIdEquipamento(resultSet.getInt("id_equipamento"));
+				equipamento.setDescricao(resultSet.getString("descricao"));
+	
+				String estadoStr = resultSet.getString("estado");
+				EstadoEquipamento estado = EstadoEquipamento.fromDescricao(estadoStr);
+				equipamento.setEstado(estado);
+	
+				equipamentos.add(equipamento);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		return equipamentos;
+	}
+	
 
     public Equipamento buscarEquipamentoPorId(int id) {
         String query = "SELECT * FROM Equipamento WHERE id_equipamento = ?";
