@@ -23,8 +23,8 @@ public class Vacina {
 
 	@Override
 	public String toString() {
-		return "ID=" + idVacina + 
-			", Descricao='" + descricao + "'";
+		return "ID = " + idVacina + 
+			" , Descricao = " + descricao;
 	}
 
 }

@@ -13,11 +13,11 @@ public class Veterinario extends Funcionario {
 
 	@Override
 	public String toString() {
-		return "ID=" + getId() + 
-			", Nome='" + getNome() + 
-			"', CPF='" + getCpf() + 
-			"', Salario=" + getSalario() + 
-			", RegistroCRMV='" + registroCrmv + "'";
+		return "ID = " + getId() + 
+			", Nome = " + getNome() + 
+			", CPF = " + getCpf() + 
+			", Salário = " + getSalario() + 
+			", Registro CRMV = " + getRegistroCrmv();
 	}
 
 }

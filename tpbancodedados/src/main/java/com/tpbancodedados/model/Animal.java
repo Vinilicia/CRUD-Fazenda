@@ -39,4 +39,13 @@ public class Animal {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+	@Override
+	public String toString() {
+		return "ID = " + idAnimal + 
+			", Nome = " + nome + 
+			", Espécie = " + especie + 
+			", Data de nascimento = " + dataNascimento;
+	}
+
 }

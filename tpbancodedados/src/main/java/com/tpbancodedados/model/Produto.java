@@ -50,9 +50,9 @@ public class Produto {
 
 	@Override
 public String toString() {
-    return "ID=" + idProduto + 
-	"', Tipo='" + tipo + 
-	"', IDPlantacao=" + idPlantacao;
+    return "ID = " + idProduto + 
+	" , Tipo = " + tipo + 
+	" , ID Plantacao = " + idPlantacao;
 }
 
 }
