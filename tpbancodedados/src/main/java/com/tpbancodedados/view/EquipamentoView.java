@@ -1,6 +1,9 @@
 package com.tpbancodedados.view;
 
+import java.util.List;
 import java.util.Scanner;
+
+import com.tpbancodedados.model.Equipamento;
 
 public class EquipamentoView {
 
@@ -58,5 +61,16 @@ public class EquipamentoView {
         } while (opcao != 0);
 
         scanner.close();
+    }
+
+    public static void exibirEquipamentos(List<Equipamento> equipamentos){
+        if (equipamentos.isEmpty()){
+            System.out.println("Nenhum Equipamento encontrado.");
+            return;
+        }
+        for (Equipamento equipamento : equipamentos){
+            System.out.println("ID: " + equipamento.getIdEquipamento() + ", Descrição: " + equipamento.getDescricao() +
+                    ", Estado: " + equipamento.getEstado());
+        }
     }
 }

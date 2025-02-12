@@ -98,7 +98,7 @@ public class VeterinarioView {
                     AnimalView.exibirAnimais(animais);
                     break;
                 case 6:
-                    System.out.println("Deletando Animail do Veterinário...");
+                    System.out.println("Deletando Animal do Veterinário...");
                     exibirVeterinarios(veterinarios);
                     System.out.println("Digite o ID do Veterinário");
                     idVeterinario = RecebedorInput.receberInputValidado(Integer.class);

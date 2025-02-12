@@ -77,10 +77,10 @@ public class VeterinarioController {
 		return false;
 	}
 
-	public List<Animal> listarAnimaisPorVeterinario(int id_veterinario) {
+	public List<Animal> listarAnimaisPorVeterinario(int idVeterinario) {
         List<Animal> animais = new ArrayList<>();
-        List<Integer> id_animais = veterinarioAnimalDAO.buscarAnimalPorVeterinario(id_veterinario);
-        for (int id : id_animais) {
+        List<Integer> idAnimais = veterinarioAnimalDAO.buscarAnimalPorVeterinario(idVeterinario);
+        for (int id : idAnimais) {
             animais.add(animalDAO.buscarAnimalPorId(id));
         }
         return animais;

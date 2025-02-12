@@ -118,7 +118,7 @@ public class AgronomoView {
                 case 2:
                     System.out.print("Buscar Salários com o valor de no mínimo: ");
                     decimal = RecebedorInput.receberInputValidado(Double.class);
-                    agronomos = agronomoController.filtrarPorSalario(decimal, false);
+                    agronomos = agronomoController.filtrarPorSalario(decimal, true);
                     exibirAgronomos(agronomos);
                     break;
                 case 3:
