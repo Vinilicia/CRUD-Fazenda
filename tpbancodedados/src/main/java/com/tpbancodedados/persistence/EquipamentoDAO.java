@@ -66,56 +66,58 @@ public class EquipamentoDAO {
     public Equipamento buscarEquipamentoPorId(int id) {
         String query = "SELECT * FROM Equipamento WHERE id_equipamento = ?";
         Equipamento equipamento = null;
-
+    
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-
+    
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-
+    
             if (resultSet.next()) {
                 equipamento = new Equipamento();
                 equipamento.setIdEquipamento(resultSet.getInt("id_equipamento"));
                 equipamento.setDescricao(resultSet.getString("descricao"));
-
+    
                 String estadoStr = resultSet.getString("estado");
-                EstadoEquipamento estado = EstadoEquipamento.valueOf(estadoStr);
+                // Usando o método fromDescricao() para converter a string para o enum
+                EstadoEquipamento estado = EstadoEquipamento.fromDescricao(estadoStr);
                 equipamento.setEstado(estado);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+    
         return equipamento;
     }
 
-	public List<Equipamento> buscarEquipamentosPorEstado(EstadoEquipamento estado) {
+    public List<Equipamento> buscarEquipamentosPorEstado(EstadoEquipamento estado) {
         String query = "SELECT * FROM Equipamento WHERE estado = ?";
         List<Equipamento> equipamentos = new ArrayList<>();
-		Equipamento equipamento = null;
-
+        Equipamento equipamento = null;
+    
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setString(1, estado.name());
+    
+            statement.setString(1, estado.toString());  // Enviando o valor correto para a consulta
             ResultSet resultSet = statement.executeQuery();
-
+    
             while (resultSet.next()) {
                 equipamento = new Equipamento();
                 equipamento.setIdEquipamento(resultSet.getInt("id_equipamento"));
                 equipamento.setDescricao(resultSet.getString("descricao"));
-
+    
                 String estadoStr = resultSet.getString("estado");
-                EstadoEquipamento estadoEquipamento = EstadoEquipamento.valueOf(estadoStr);
+                // Usando o método fromDescricao() para converter a string para o enum
+                EstadoEquipamento estadoEquipamento = EstadoEquipamento.fromDescricao(estadoStr);
                 equipamento.setEstado(estadoEquipamento);
-
+    
                 equipamentos.add(equipamento);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-			return null;
+            return null;
         }
-
+    
         return equipamentos;
     }
 

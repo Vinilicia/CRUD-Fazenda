@@ -14,15 +14,15 @@ public class CaseiroDAO {
 
     private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
-    public boolean inserirCaseiro(Caseiro agronomo) {
+    public boolean inserirCaseiro(Caseiro caseiro) {
 		Funcionario funcionario = new Funcionario();
 
-		funcionario.setCpf(agronomo.getCpf());
-		funcionario.setNome(agronomo.getNome());
-		funcionario.setSalario(agronomo.getSalario());
+		funcionario.setCpf(caseiro.getCpf());
+		funcionario.setNome(caseiro.getNome());
+		funcionario.setSalario(caseiro.getSalario());
         int idFuncionario = funcionarioDAO.inserirFuncionario(funcionario);
         if (idFuncionario == -1) {
-            System.out.println("Erro ao inserir funcionário base para agronomo.");
+            System.out.println("Erro ao inserir funcionário base para caseiro.");
             return false;
         }
 
@@ -44,7 +44,7 @@ public class CaseiroDAO {
 
 	public List<Caseiro> listarCaseiros() {
 		String query = "SELECT * FROM Caseiro";
-		List<Caseiro> agronomos = new ArrayList<>();
+		List<Caseiro> caseiros = new ArrayList<>();
 
 		try (Connection connection = DatabaseConnection.getConnection();
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -52,19 +52,21 @@ public class CaseiroDAO {
 
 
 			while (resultSet.next()) {
+				int idFuncionario = resultSet.getInt("id_funcionario");
 				Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorId(resultSet.getInt("id_funcionario"));
-				Caseiro agronomo = new Caseiro();
-				agronomo.setNome(funcionario.getNome());
-				agronomo.setCpf(funcionario.getCpf());
-				agronomo.setSalario(funcionario.getSalario());
+				Caseiro caseiro = new Caseiro();
+				caseiro.setId(idFuncionario);
+				caseiro.setNome(funcionario.getNome());
+				caseiro.setCpf(funcionario.getCpf());
+				caseiro.setSalario(funcionario.getSalario());
 
-				agronomos.add(agronomo);
+				caseiros.add(caseiro);
 			}	
 		} catch (SQLException e) {
             e.printStackTrace();
         }
 
-		return agronomos;
+		return caseiros;
 	}
 
 	public Caseiro buscarCaseiroPorId(int id){
@@ -91,13 +93,13 @@ public class CaseiroDAO {
 		return caseiro;
 	}
 
-	public boolean atualizarCaseiro(Caseiro agronomo) {
+	public boolean atualizarCaseiro(Caseiro caseiro) {
 		
 		Funcionario funcionario = new Funcionario();
-		funcionario.setCpf(agronomo.getCpf());
-		funcionario.setId(agronomo.getId());
-		funcionario.setNome(agronomo.getNome());
-		funcionario.setSalario(agronomo.getSalario());
+		funcionario.setCpf(caseiro.getCpf());
+		funcionario.setId(caseiro.getId());
+		funcionario.setNome(caseiro.getNome());
+		funcionario.setSalario(caseiro.getSalario());
 
 		return funcionarioDAO.atualizarFuncionario(funcionario);
 	}
