@@ -20,4 +20,11 @@ public class Vacina {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+	@Override
+	public String toString() {
+		return "ID=" + idVacina + 
+			", Descricao='" + descricao + "'";
+	}
+
 }

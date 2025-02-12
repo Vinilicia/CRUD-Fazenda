@@ -3,7 +3,7 @@ package com.tpbancodedados.model;
 public class Produto {
     private int idProduto;
     private String tipo;
-    private float quantidade;
+    private double quantidade;
     private String unidade;
     private int idPlantacao;
 
@@ -24,11 +24,11 @@ public class Produto {
         this.tipo = tipo;
     }
 
-    public float getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(float quantidade) {
+    public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -47,4 +47,12 @@ public class Produto {
     public void setIdPlantacao(int idPlantacao) {
         this.idPlantacao = idPlantacao;
     }
+
+	@Override
+public String toString() {
+    return "ID=" + idProduto + 
+	"', Tipo='" + tipo + 
+	"', IDPlantacao=" + idPlantacao;
+}
+
 }

@@ -58,4 +58,15 @@ public class Plantacao {
     public void setDataColheita(LocalDate dataColheita) {
         this.dataColheita = dataColheita;
     }
+
+	@Override
+	public String toString() {
+		return "ID=" + idPlantacao + 
+			", ID_Agronomo=" + idAgronomo + 
+			", Cultura='" + cultura + "'" + 
+			", Area=" + area + 
+			", Data_Plantio=" + dataPlantio + 
+			", Data_Colheita=" + dataColheita;
+	}
+
 }
