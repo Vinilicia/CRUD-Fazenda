@@ -12,16 +12,16 @@ import com.tpbancodedados.model.Produto;
 public class ProdutoDAO {
 
     public int inserirProduto(Produto produto) {
-        String query = "INSERT INTO Produto (nome, tipo, quantidade, unidade, id_plantacao) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Produto (tipo, quantidade, unidade, id_plantacao) VALUES (?, ?, ?, ?)";
         int idGerado = -1;
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            statement.setString(2, produto.getTipo());
-            statement.setFloat(3, (float)produto.getQuantidade());
-            statement.setString(4, produto.getUnidade());
-            statement.setInt(5, produto.getIdPlantacao());
+            statement.setString(1, produto.getTipo());
+            statement.setFloat(2, (float)produto.getQuantidade());
+            statement.setString(3, produto.getUnidade());
+            statement.setInt(4, produto.getIdPlantacao());
 
             statement.executeUpdate();
 
