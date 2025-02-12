@@ -17,16 +17,16 @@ public class AgronomoController {
 		return agronomoDAO.listarAgronomos();
 	}
 
-	public List<Agronomo> buscAgronomosPorAreaEspecializacao(String areaEspecializacao){
-		return agronomoDAO.buscarAgronomosPorEspecializacao(areaEspecializacao);
-	}
-
 	public boolean atualizarAgronomo(Agronomo novoAgronomo) {
 		return agronomoDAO.atualizarAgronomo(novoAgronomo);
 	}
 
 	public boolean deletarAgronomo(int id) {
 		return agronomoDAO.deletarAgronomo(id);
+	}
+
+	public  List<Agronomo> buscarAgronomosPorEspecializacao(String especializacao) {
+		return agronomoDAO.buscarAgronomosPorEspecializacao(especializacao);
 	}
 
 	public List<Agronomo> filtrarPorSalario(double salarioBase, boolean maior) {
@@ -45,5 +45,7 @@ public class AgronomoController {
 		}
 		return agronomosFiltrados;
 	}
+
+	
 
 }

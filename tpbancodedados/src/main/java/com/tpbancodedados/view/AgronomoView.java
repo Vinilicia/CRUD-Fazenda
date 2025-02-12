@@ -125,7 +125,7 @@ public class AgronomoView {
                 case 3:
                     System.out.print("Digite a área de especialização: ");
                     string = scanner.nextLine();
-                    agronomos = agronomoController.buscAgronomosPorAreaEspecializacao(string);
+                    agronomos = agronomoController.buscarAgronomosPorEspecializacao(string);
                     exibirAgronomos(agronomos);
                     break;
                 case 0:
