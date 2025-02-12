@@ -65,7 +65,7 @@ CREATE TABLE Plantacao (
     id_plantacao INT AUTO_INCREMENT PRIMARY KEY,
     id_funcionario INT,
     cultura CHAR(100) NOT NULL,
-    area CHAR(50) NOT NULL,
+    area FLOAT NOT NULL,
     data_plantio DATE NOT NULL,
     data_colheita DATE,
     FOREIGN KEY (id_funcionario) REFERENCES Agronomo(id_funcionario) ON DELETE SET NULL

@@ -12,7 +12,7 @@ import com.tpbancodedados.model.CaseiroEquipamento;
 public class CaseiroEquipamentoDAO {
 
     public boolean inserirCaseiroEquipamento(CaseiroEquipamento caseiroEquipamento) {
-        String query = "INSERT INTO CaseiroEquipamento (id_caseiro, id_equipamento) VALUES (?, ?)";
+        String query = "INSERT INTO CaseiroEquipamento (id_funcionario, id_equipamento) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -40,7 +40,7 @@ public class CaseiroEquipamentoDAO {
 
             while (resultSet.next()) {
                 CaseiroEquipamento ce = new CaseiroEquipamento();
-                ce.setIdCaseiro(resultSet.getInt("id_caseiro"));
+                ce.setIdCaseiro(resultSet.getInt("id_funcionario"));
                 ce.setIdEquipamento(resultSet.getInt("id_equipamento"));
                 lista.add(ce);
             }
@@ -53,7 +53,7 @@ public class CaseiroEquipamentoDAO {
     }
 
 	public List<Integer> listarEquipamentosPorCaseiro(int idCaseiro) {
-		String query = "SELECT * FROM CaseiroEquipamento WHERE id_caseiro = ?";
+		String query = "SELECT * FROM CaseiroEquipamento WHERE id_funcionario = ?";
 		List<Integer> idEquipamentos = null;
 	
 		try (Connection connection = DatabaseConnection.getConnection();
@@ -88,7 +88,7 @@ public class CaseiroEquipamentoDAO {
 			idCaseiros = new ArrayList<>();
 	
 			while (resultSet.next()) {
-				int idCaseiro = resultSet.getInt("id_caseiro");
+				int idCaseiro = resultSet.getInt("id_funcionario");
 				idCaseiros.add(idCaseiro);
 			}
 	
@@ -101,7 +101,7 @@ public class CaseiroEquipamentoDAO {
 	}	
 
     public boolean atualizarCaseiroEquipamento(int idCaseiro, int idEquipamentoNovo) {
-        String query = "UPDATE CaseiroEquipamento SET id_equipamento = ? WHERE id_caseiro = ?";
+        String query = "UPDATE CaseiroEquipamento SET id_equipamento = ? WHERE id_funcionario = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -120,7 +120,7 @@ public class CaseiroEquipamentoDAO {
     }
 
     public boolean deletarCaseiroEquipamento(int idCaseiro, int idEquipamento) {
-        String query = "DELETE FROM CaseiroEquipamento WHERE id_caseiro = ? AND id_equipamento = ?";
+        String query = "DELETE FROM CaseiroEquipamento WHERE id_funcionario = ? AND id_equipamento = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {

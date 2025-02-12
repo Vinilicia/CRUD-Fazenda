@@ -12,7 +12,7 @@ import com.tpbancodedados.model.Plantacao;
 public class PlantacaoDAO {
 
     public int inserirPlantacao(Plantacao plantacao) {
-        String query = "INSERT INTO Plantacao (id_agronomo, cultura, area, data_plantio, data_colheita) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Plantacao (id_funcionario, cultura, area, data_plantio, data_colheita) VALUES (?, ?, ?, ?, ?)";
         int idGerado = -1;
 
         try (Connection connection = DatabaseConnection.getConnection();
@@ -50,7 +50,7 @@ public class PlantacaoDAO {
             while (resultSet.next()) {
                 Plantacao plantacao = new Plantacao();
                 plantacao.setIdPlantacao(resultSet.getInt("id_plantacao"));
-                plantacao.setIdAgronomo(resultSet.getInt("id_agronomo"));
+                plantacao.setIdAgronomo(resultSet.getInt("id_funcionario"));
                 plantacao.setCultura(resultSet.getString("cultura"));
                 plantacao.setArea(resultSet.getFloat("area"));
 
@@ -79,7 +79,7 @@ public class PlantacaoDAO {
             if (resultSet.next()) {
                 plantacao = new Plantacao();
                 plantacao.setIdPlantacao(resultSet.getInt("id_plantacao"));
-                plantacao.setIdAgronomo(resultSet.getInt("id_agronomo"));
+                plantacao.setIdAgronomo(resultSet.getInt("id_funcionario"));
                 plantacao.setCultura(resultSet.getString("cultura"));
                 plantacao.setArea(resultSet.getFloat("area"));
                 plantacao.setDataPlantio(resultSet.getDate("data_plantio").toLocalDate());
@@ -93,7 +93,7 @@ public class PlantacaoDAO {
     }
 
     public List<Plantacao> listarPlantacaoPorAgronomo(int idAgronomo) {
-        String query = "SELECT * FROM Plantacao WHERE id_agronomo = ?";
+        String query = "SELECT * FROM Plantacao WHERE id_funcionario = ?";
         Plantacao plantacao = null;
         List<Plantacao> plantacoes = new ArrayList<>();
 
@@ -106,7 +106,7 @@ public class PlantacaoDAO {
             while (resultSet.next()) {
                 plantacao = new Plantacao();
                 plantacao.setIdPlantacao(resultSet.getInt("id_plantacao"));
-                plantacao.setIdAgronomo(resultSet.getInt("id_agronomo"));
+                plantacao.setIdAgronomo(resultSet.getInt("id_funcionario"));
                 plantacao.setCultura(resultSet.getString("cultura"));
                 plantacao.setArea(resultSet.getFloat("area"));
 
@@ -137,7 +137,7 @@ public class PlantacaoDAO {
             while (resultSet.next()) {
                 plantacao = new Plantacao();
                 plantacao.setIdPlantacao(resultSet.getInt("id_plantacao"));
-                plantacao.setIdAgronomo(resultSet.getInt("id_agronomo"));
+                plantacao.setIdAgronomo(resultSet.getInt("id_funcionario"));
                 plantacao.setCultura(resultSet.getString("cultura"));
                 plantacao.setArea(resultSet.getFloat("area"));
 
@@ -156,7 +156,7 @@ public class PlantacaoDAO {
 
 
     public boolean atualizarPlantacao(Plantacao plantacao) {
-        String query = "UPDATE Plantacao SET id_agronomo = ?, cultura = ?, area = ?, data_plantio = ?, data_colheita = ? WHERE id_plantacao = ?";
+        String query = "UPDATE Plantacao SET id_funcionario = ?, cultura = ?, area = ?, data_plantio = ?, data_colheita = ? WHERE id_plantacao = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {

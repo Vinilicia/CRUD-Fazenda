@@ -143,16 +143,16 @@ public class ProdutoDAO {
     }
 
     public boolean atualizarProduto(Produto produto) {
-        String query = "UPDATE Produto SET nome = ?, tipo = ?, quantidade = ?, unidade = ?, id_plantacao = ? WHERE id_produto = ?";
+        String query = "UPDATE Produto SET tipo = ?, quantidade = ?, unidade = ?, id_plantacao = ? WHERE id_produto = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            statement.setString(2, produto.getTipo());
-            statement.setFloat(3, (float)produto.getQuantidade());
-            statement.setString(4, produto.getUnidade());
-            statement.setInt(5, produto.getIdPlantacao());
-            statement.setInt(6, produto.getIdProduto());
+            statement.setString(1, produto.getTipo());
+            statement.setFloat(2, (float)produto.getQuantidade());
+            statement.setString(3, produto.getUnidade());
+            statement.setInt(4, produto.getIdPlantacao());
+            statement.setInt(5, produto.getIdProduto());
 
             int rowsUpdated = statement.executeUpdate();
             return rowsUpdated > 0;

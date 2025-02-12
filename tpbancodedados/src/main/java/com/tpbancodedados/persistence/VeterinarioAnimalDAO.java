@@ -13,7 +13,7 @@ public class VeterinarioAnimalDAO {
 
     // Inserir relação veterinário-animal
     public boolean inserirVeterinarioAnimal(VeterinarioAnimal veterinarioAnimal) {
-        String query = "INSERT INTO VeterinarioAnimal (id_veterinario, id_animal) VALUES (?, ?)";
+        String query = "INSERT INTO VeterinarioAnimal (id_funcionario, id_animal) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -42,7 +42,7 @@ public class VeterinarioAnimalDAO {
 
             while (resultSet.next()) {
                 VeterinarioAnimal va = new VeterinarioAnimal();
-                va.setIdVeterinario(resultSet.getInt("id_veterinario"));
+                va.setIdVeterinario(resultSet.getInt("id_funcionario"));
                 va.setIdAnimal(resultSet.getInt("id_animal"));
                 lista.add(va);
             }
@@ -54,14 +54,14 @@ public class VeterinarioAnimalDAO {
         return lista;
     }
 
-	public List<Integer> buscarAnimalPorVeterinario(int id_veterinario) {
-		String query = "SELECT * FROM VeterinarioAnimal WHERE id_veterinario = ?";
+	public List<Integer> buscarAnimalPorVeterinario(int id_funcionario) {
+		String query = "SELECT * FROM VeterinarioAnimal WHERE id_funcionario = ?";
 		ArrayList<Integer> id_animais = null;
 
 		try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            statement.setInt(1, id_veterinario);
+            statement.setInt(1, id_funcionario);
             ResultSet resultSet = statement.executeQuery();
 			id_animais = new ArrayList<Integer>();
 
@@ -90,7 +90,7 @@ public class VeterinarioAnimalDAO {
 			id_animais = new ArrayList<Integer>();
 
             if (resultSet.next()) {
-                int novoId = resultSet.getInt("id_veterinario");
+                int novoId = resultSet.getInt("id_funcionario");
                 id_animais.add(novoId);
             }
 
@@ -104,7 +104,7 @@ public class VeterinarioAnimalDAO {
 
     // Atualizar relação veterinário-animal
     public boolean atualizarVeterinarioAnimal(int idVeterinario, int idAnimalNovo) {
-        String query = "UPDATE VeterinarioAnimal SET id_animal = ? WHERE id_veterinario = ?";
+        String query = "UPDATE VeterinarioAnimal SET id_animal = ? WHERE id_funcionario = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -124,7 +124,7 @@ public class VeterinarioAnimalDAO {
 
     // Deletar relação veterinário-animal
     public boolean deletarVeterinarioAnimal(int idVeterinario, int idAnimal) {
-        String query = "DELETE FROM VeterinarioAnimal WHERE id_veterinario = ? AND id_animal = ?";
+        String query = "DELETE FROM VeterinarioAnimal WHERE id_funcionario = ? AND id_animal = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {

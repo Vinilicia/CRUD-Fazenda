@@ -66,16 +66,16 @@ INSERT INTO CaseiroEquipamento (id_funcionario, id_equipamento) VALUES
 
 -- Inserindo Plantações
 INSERT INTO Plantacao (id_funcionario, cultura, area, data_plantio, data_colheita) VALUES
-(7, 'Milho', '50 hectares', '2024-01-10', '2024-07-10'),
-(8, 'Soja', '40 hectares', '2024-02-15', '2024-08-20'),
-(9, 'Trigo', '30 hectares', '2024-03-20', '2024-09-25'),
-(7, 'Cana-de-açúcar', '70 hectares', '2023-12-05', '2024-06-10'),
-(8, 'Feijão', '25 hectares', '2024-04-10', '2024-10-15'),
-(9, 'Girassol', '35 hectares', '2023-11-01', '2024-05-01'),
-(7, 'Batata', '20 hectares', '2024-05-15', '2024-11-15'),
-(8, 'Café', '15 hectares', '2023-09-10', '2024-03-10'),
-(9, 'Algodão', '45 hectares', '2024-06-20', '2024-12-20'),
-(7, 'Arroz', '55 hectares', '2023-08-25', '2024-02-25');
+(7, 'Milho', 50, '2024-01-10', '2024-07-10'),
+(8, 'Soja', 40, '2024-02-15', '2024-08-20'),
+(9, 'Trigo', 30, '2024-03-20', '2024-09-25'),
+(7, 'Cana-de-açúcar', 70, '2023-12-05', '2024-06-10'),
+(8, 'Feijão', 25, '2024-04-10', '2024-10-15'),
+(9, 'Girassol', 35, '2023-11-01', '2024-05-01'),
+(7, 'Batata', 20, '2024-05-15', '2024-11-15'),
+(8, 'Café', 15, '2023-09-10', '2024-03-10'),
+(9, 'Algodão', 45, '2024-06-20', '2024-12-20'),
+(7, 'Arroz', 55, '2023-08-25', '2024-02-25');
 
 -- Inserindo Produtos
 INSERT INTO Produto (tipo, quantidade, unidade, id_plantacao) VALUES

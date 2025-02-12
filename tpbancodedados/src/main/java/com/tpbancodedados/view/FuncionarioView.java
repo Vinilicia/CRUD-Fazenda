@@ -10,6 +10,7 @@ import com.tpbancodedados.controller.FuncionarioController;
 import com.tpbancodedados.view.AgronomoView;
 import com.tpbancodedados.view.CaseiroView;
 import com.tpbancodedados.view.VeterinarioView;
+import com.tpbancodedados.view.RecebedorInput;
 
 public class FuncionarioView {
     private static FuncionarioController funcionarioController = new FuncionarioController();
