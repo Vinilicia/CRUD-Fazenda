@@ -69,26 +69,26 @@ public class CaseiroDAO {
 
 	public Caseiro buscarCaseiroPorId(int id){
 		String query = "SELECT * FROM Caseiro WHERE id_funcionario = ?";
-		Caseiro agronomo = null;
+		Caseiro caseiro = null;
 
 		try (Connection connection = DatabaseConnection.getConnection();
-		PreparedStatement statement = connection.prepareStatement(query);
-		ResultSet resultSet = statement.executeQuery()){
-
+		PreparedStatement statement = connection.prepareStatement(query)){
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
 			Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorId(id);
 
 			if (resultSet.next()){
-				agronomo = new Caseiro();
-				agronomo.setId(resultSet.getInt("id_funcionario"));
-				agronomo.setNome(funcionario.getNome());
-				agronomo.setCpf(funcionario.getCpf());
-				agronomo.setSalario(funcionario.getSalario());
+				caseiro = new Caseiro();
+				caseiro.setId(resultSet.getInt("id_funcionario"));
+				caseiro.setNome(funcionario.getNome());
+				caseiro.setCpf(funcionario.getCpf());
+				caseiro.setSalario(funcionario.getSalario());
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return agronomo;
+		return caseiro;
 	}
 
 	public boolean atualizarCaseiro(Caseiro agronomo) {

@@ -8,8 +8,6 @@ import com.tpbancodedados.model.Equipamento;
 import com.tpbancodedados.controller.CaseiroController;
 import com.tpbancodedados.controller.EquipamentoController;
 
-import com.tpbancodedados.view.RecebedorInput;
-import com.tpbancodedados.view.EquipamentoView;
 
 public class CaseiroView {
     private static CaseiroController caseiroController = new CaseiroController();

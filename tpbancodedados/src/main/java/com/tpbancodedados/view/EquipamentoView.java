@@ -8,7 +8,6 @@ import com.tpbancodedados.model.EstadoEquipamento;
 
 import com.tpbancodedados.controller.EquipamentoController;
 
-import com.tpbancodedados.view.RecebedorInput;
 
 public class EquipamentoView {
     private static EquipamentoController equipamentoController = new EquipamentoController();

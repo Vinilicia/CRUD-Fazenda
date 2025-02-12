@@ -78,9 +78,10 @@ public class VeterinarioDAO {
 		Veterinario veterinario = null;
 
 		try (Connection connection = DatabaseConnection.getConnection();
-		PreparedStatement statement = connection.prepareStatement(query);
-		ResultSet resultSet = statement.executeQuery()){
-
+		PreparedStatement statement = connection.prepareStatement(query)){
+			
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
 			Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorId(id);
 
 			if (resultSet.next()){

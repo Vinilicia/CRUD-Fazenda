@@ -6,7 +6,6 @@ public class Funcionario {
     private String cpf;
     private double salario;
 
-    // Getters e Setters
     public int getId() {
         return idFuncionario;
     }

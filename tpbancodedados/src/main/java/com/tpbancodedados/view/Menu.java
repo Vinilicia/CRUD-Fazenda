@@ -1,11 +1,5 @@
 package com.tpbancodedados.view;
 
-import com.tpbancodedados.view.FuncionarioView;
-import com.tpbancodedados.view.AnimalView;
-import com.tpbancodedados.view.EquipamentoView;
-import com.tpbancodedados.view.PlantacaoView;
-import com.tpbancodedados.view.ProdutoView;
-import com.tpbancodedados.view.VacinaView;
 
 import java.util.Scanner;
 
