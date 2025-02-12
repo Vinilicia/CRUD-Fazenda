@@ -1,0 +1,111 @@
+-- Inserindo Funcionarios
+INSERT INTO Funcionario (nome, cpf, salario) VALUES
+('Carlos Silva', '111.111.111-11', 3500.00),
+('Ana Souza', '222.222.222-22', 4200.00),
+('Pedro Santos', '333.333.333-33', 3900.00),
+('Julia Mendes', '444.444.444-44', 4100.00),
+('Roberto Lima', '555.555.555-55', 3800.00),
+('Fernanda Alves', '666.666.666-66', 4000.00),
+('Rafael Costa', '777.777.777-77', 3600.00),
+('Mariana Rocha', '888.888.888-88', 3700.00),
+('João Oliveira', '999.999.999-99', 4300.00),
+('Beatriz Gomes', '000.000.000-00', 3900.00);
+
+-- Associando Veterinarios
+INSERT INTO Veterinario (id_funcionario, registro_crmv) VALUES
+(1, 'CRMV-12345'),
+(2, 'CRMV-67890'),
+(3, 'CRMV-54321');
+
+-- Associando Caseiros
+INSERT INTO Caseiro (id_funcionario) VALUES
+(4), (5), (6);
+
+-- Associando Agronomos
+INSERT INTO Agronomo (id_funcionario, area_especializacao) VALUES
+(7, 'Solo e Plantio'),
+(8, 'Irrigação'),
+(9, 'Fertilizantes');
+
+-- Inserindo Animais
+INSERT INTO Animal (nome, especie, data_nascimento) VALUES
+('Boi Bravo', 'Bovino', '2021-06-15'),
+('Mimosa', 'Bovino', '2020-04-20'),
+('Pé de Pano', 'Equino', '2019-08-10'),
+('Fumaça', 'Equino', '2018-11-25'),
+('Bolota', 'Suíno', '2022-02-14'),
+('Rosado', 'Suíno', '2021-12-05'),
+('Galante', 'Caprino', '2020-09-30'),
+('Branquinha', 'Caprino', '2019-07-08'),
+('Pintado', 'Bovino', '2023-01-01'),
+('Negão', 'Bovino', '2022-05-18');
+
+-- Relacionando Veterinarios e Animais
+INSERT INTO VeterinarioAnimal (id_funcionario, id_animal) VALUES
+(1, 1), (1, 2), (1, 3),
+(2, 4), (2, 5), (2, 6),
+(3, 7), (3, 8), (3, 9), (3, 10);
+
+-- Inserindo Equipamentos
+INSERT INTO Equipamento (descricao, estado) VALUES
+('Trator John Deere', 'Disponível'),
+('Colheitadeira Case IH', 'Em manutenção'),
+('Irrigador Pivot', 'Disponível'),
+('Roçadeira Husqvarna', 'Quebrado'),
+('Pulverizador Jacto', 'Disponível'),
+('Enfardadeira New Holland', 'Em manutenção'),
+('Arado de Disco', 'Disponível'),
+('Semeadeira Kuhn', 'Disponível'),
+('Motosserra Stihl', 'Quebrado'),
+('Plantadeira John Deere', 'Em manutenção');
+
+-- Relacionando Caseiros e Equipamentos
+INSERT INTO CaseiroEquipamento (id_funcionario, id_equipamento) VALUES
+(4, 1), (4, 2), (5, 3), (5, 4), (6, 5), (6, 6),
+(4, 7), (5, 8), (6, 9), (6, 10);
+
+-- Inserindo Plantações
+INSERT INTO Plantacao (id_funcionario, cultura, area, data_plantio, data_colheita) VALUES
+(7, 'Milho', '50 hectares', '2024-01-10', '2024-07-10'),
+(8, 'Soja', '40 hectares', '2024-02-15', '2024-08-20'),
+(9, 'Trigo', '30 hectares', '2024-03-20', '2024-09-25'),
+(7, 'Cana-de-açúcar', '70 hectares', '2023-12-05', '2024-06-10'),
+(8, 'Feijão', '25 hectares', '2024-04-10', '2024-10-15'),
+(9, 'Girassol', '35 hectares', '2023-11-01', '2024-05-01'),
+(7, 'Batata', '20 hectares', '2024-05-15', '2024-11-15'),
+(8, 'Café', '15 hectares', '2023-09-10', '2024-03-10'),
+(9, 'Algodão', '45 hectares', '2024-06-20', '2024-12-20'),
+(7, 'Arroz', '55 hectares', '2023-08-25', '2024-02-25');
+
+-- Inserindo Produtos
+INSERT INTO Produto (tipo, quantidade, unidade, id_plantacao) VALUES
+('Grãos de Milho', 50000, 'kg', 1),
+('Soja Processada', 45000, 'kg', 2),
+('Farinha de Trigo', 30000, 'kg', 3),
+('Açúcar Refinado', 70000, 'kg', 4),
+('Feijão Preto', 25000, 'kg', 5),
+('Óleo de Girassol', 35000, 'litros', 6),
+('Batatas', 20000, 'kg', 7),
+('Grãos de Café', 15000, 'kg', 8),
+('Fardos de Algodão', 45000, 'kg', 9),
+('Arroz Branco', 55000, 'kg', 10);
+
+-- Inserindo Vacinas
+INSERT INTO Vacina (descricao) VALUES
+('Vacina contra Febre Aftosa'),
+('Vacina contra Brucelose'),
+('Vacina contra Leptospirose'),
+('Vacina contra Clostridioses'),
+('Vacina contra Raiva'),
+('Vacina contra Anaplasmose'),
+('Vacina contra Verminoses'),
+('Vacina contra Ectima Contagioso'),
+('Vacina contra Gripe Equina'),
+('Vacina contra Doença de Aujeszky');
+
+-- Registrando Vacinações
+INSERT INTO RegistroVacinacao (id_vacina, id_animal, data_vacinacao) VALUES
+(1, 1, '2024-02-01'), (2, 2, '2024-02-10'), (3, 3, '2024-02-15'),
+(4, 4, '2024-02-20'), (5, 5, '2024-02-25'), (6, 6, '2024-03-01'),
+(7, 7, '2024-03-05'), (8, 8, '2024-03-10'), (9, 9, '2024-03-15'),
+(10, 10, '2024-03-20');

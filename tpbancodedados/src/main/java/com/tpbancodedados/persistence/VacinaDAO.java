@@ -12,7 +12,7 @@ import com.tpbancodedados.model.Vacina;
 public class VacinaDAO {
 
     public boolean inserirVacina(Vacina vacina) {
-        String query = "INSERT INTO Vacina (id_vacinacao, descricao) VALUES (?, ?)";
+        String query = "INSERT INTO Vacina (id_vacina, descricao) VALUES (?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -40,7 +40,7 @@ public class VacinaDAO {
 
             while (resultSet.next()) {
                 Vacina vacina = new Vacina();
-                vacina.setIdVacina(resultSet.getInt("id_vacinacao"));
+                vacina.setIdVacina(resultSet.getInt("id_vacina"));
                 vacina.setDescricao(resultSet.getString("descricao"));
                 lista.add(vacina);
             }
@@ -53,7 +53,7 @@ public class VacinaDAO {
     }
 
     public Vacina buscarVacinaPorId(int idVacina) {
-        String query = "SELECT * FROM Vacina WHERE id_vacinacao = ?";
+        String query = "SELECT * FROM Vacina WHERE id_vacina = ?";
         Vacina vacina = null;
 
         try (Connection connection = DatabaseConnection.getConnection();
@@ -64,7 +64,7 @@ public class VacinaDAO {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     vacina = new Vacina();
-                    vacina.setIdVacina(resultSet.getInt("id_vacinacao"));
+                    vacina.setIdVacina(resultSet.getInt("id_vacina"));
                     vacina.setDescricao(resultSet.getString("descricao"));
                 }
             }
@@ -88,7 +88,7 @@ public class VacinaDAO {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     vacina = new Vacina();
-                    vacina.setIdVacina(resultSet.getInt("id_vacinacao"));
+                    vacina.setIdVacina(resultSet.getInt("id_vacina"));
                     vacina.setDescricao(resultSet.getString("descricao"));
                 }
             }
@@ -102,7 +102,7 @@ public class VacinaDAO {
     }
 
     public boolean atualizarVacina(Vacina vacina) {
-        String query = "UPDATE Vacina SET descricao = ? WHERE id_vacinacao = ?";
+        String query = "UPDATE Vacina SET descricao = ? WHERE id_vacina = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -121,7 +121,7 @@ public class VacinaDAO {
     }
 
     public boolean deletarVacina(int idVacina) {
-        String query = "DELETE FROM Vacina WHERE id_vacinacao = ?";
+        String query = "DELETE FROM Vacina WHERE id_vacina = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {

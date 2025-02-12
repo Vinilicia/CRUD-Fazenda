@@ -233,8 +233,7 @@ public class VeterinarioView {
             return;
         }
         for (Veterinario veterinario : veterinarios){
-            System.out.println("ID: " + veterinario.getId() + ", Nome: " + veterinario.getNome() +
-                    ", CPF: " + veterinario.getCpf() + ", Salário: " + veterinario.getSalario() + ", Registro CRMV: " + veterinario.getRegistroCrmv());
+            System.out.println(veterinario);
         }
     }
 
@@ -243,7 +242,6 @@ public class VeterinarioView {
             System.out.println("Nenhum funcionário encontrado.");
             return;
         }
-        System.out.println("ID: " + veterinario.getId() + ", Nome: " + veterinario.getNome() +
-                    ", CPF: " + veterinario.getCpf() + ", Salário: " + veterinario.getSalario() + ", Registro CRMV: " + veterinario.getRegistroCrmv());
+        System.out.println(veterinario);
     }
 }

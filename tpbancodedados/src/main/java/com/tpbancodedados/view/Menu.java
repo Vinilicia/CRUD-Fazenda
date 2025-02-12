@@ -5,6 +5,7 @@ import com.tpbancodedados.view.AnimalView;
 import com.tpbancodedados.view.EquipamentoView;
 import com.tpbancodedados.view.PlantacaoView;
 import com.tpbancodedados.view.ProdutoView;
+import com.tpbancodedados.view.VacinaView;
 
 import java.util.Scanner;
 
@@ -52,6 +53,10 @@ public class Menu {
                 case 5:
                     System.out.println("Administrando Produto...");
                     ProdutoView.exibir();
+                    break;
+                case 6:
+                    System.out.println("Administrando Vacina...");
+                    VacinaView.exibir();
                     break;
                 case 0:
                     System.out.println("Saindo...");
