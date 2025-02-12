@@ -19,7 +19,7 @@ public class ProdutoDAO {
              PreparedStatement statement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(2, produto.getTipo());
-            statement.setFloat(3, produto.getQuantidade());
+            statement.setFloat(3, (float)produto.getQuantidade());
             statement.setString(4, produto.getUnidade());
             statement.setInt(5, produto.getIdPlantacao());
 
@@ -49,7 +49,7 @@ public class ProdutoDAO {
                 Produto produto = new Produto();
                 produto.setIdProduto(resultSet.getInt("id_produto"));
                 produto.setTipo(resultSet.getString("tipo"));
-                produto.setQuantidade(resultSet.getFloat("quantidade"));
+                produto.setQuantidade((double)resultSet.getFloat("quantidade"));
                 produto.setUnidade(resultSet.getString("unidade"));
                 produto.setIdPlantacao(resultSet.getInt("id_plantacao"));
                 produtos.add(produto);
@@ -75,7 +75,7 @@ public class ProdutoDAO {
                 produto = new Produto();
                 produto.setIdProduto(resultSet.getInt("id_produto"));
                 produto.setTipo(resultSet.getString("tipo"));
-                produto.setQuantidade(resultSet.getFloat("quantidade"));
+                produto.setQuantidade((double)resultSet.getFloat("quantidade"));
                 produto.setUnidade(resultSet.getString("unidade"));
                 produto.setIdPlantacao(resultSet.getInt("id_plantacao"));
             }
@@ -101,7 +101,7 @@ public class ProdutoDAO {
                 produto = new Produto();
                 produto.setIdProduto(resultSet.getInt("id_produto"));
                 produto.setTipo(resultSet.getString("tipo"));
-                produto.setQuantidade(resultSet.getFloat("quantidade"));
+                produto.setQuantidade((double)resultSet.getFloat("quantidade"));
                 produto.setUnidade(resultSet.getString("unidade"));
                 produto.setIdPlantacao(resultSet.getInt("id_plantacao"));
 				produtos.add(produto);
@@ -129,7 +129,7 @@ public class ProdutoDAO {
                 produto = new Produto();
                 produto.setIdProduto(resultSet.getInt("id_produto"));
                 produto.setTipo(resultSet.getString("tipo"));
-                produto.setQuantidade(resultSet.getFloat("quantidade"));
+                produto.setQuantidade((double)(resultSet.getFloat("quantidade")));
                 produto.setUnidade(resultSet.getString("unidade"));
                 produto.setIdPlantacao(resultSet.getInt("id_plantacao"));
 				produtos.add(produto);
@@ -149,7 +149,7 @@ public class ProdutoDAO {
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(2, produto.getTipo());
-            statement.setFloat(3, produto.getQuantidade());
+            statement.setFloat(3, (float)produto.getQuantidade());
             statement.setString(4, produto.getUnidade());
             statement.setInt(5, produto.getIdPlantacao());
             statement.setInt(6, produto.getIdProduto());
